@@ -17,7 +17,7 @@ const HowItWorks= () => {
           </div>
             <CalltoAction
                 className="mt-5"/>
-            <div className='mt-10 border-t border-gray-300'><Footer/></div>
+            <div><Footer/></div>
         </div>
     </main>
   )

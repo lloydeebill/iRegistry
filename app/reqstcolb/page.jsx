@@ -31,7 +31,7 @@ const ReqstColb = () => {
         <div className="mt-6 pt-6">
           <PoweredBy/>
         </div>
-        <div className="mt-10 border-t border-gray-300">
+        <div>
           <Footer />
         </div>
       </div>

@@ -34,7 +34,7 @@ const ReqstCenoDeath= () => {
             <div className="mt-6 pt-6">
             <PoweredBy/>
             </div>
-            <div className='mt-10 border-t border-gray-300'><Footer/></div>
+            <div><Footer/></div>
         </div>
     </main>
   )

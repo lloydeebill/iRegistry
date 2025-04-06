@@ -6,7 +6,7 @@ const CustomButton = ({ buttonText, href }) => {
   };
 
   return (
-    <button onClick={() => handleButtonClick()} className="text-black place-items-center px-12 py-4 sm:w-fit rounded-full font-semibold text-lg lg:text-xl bg-[#96CFCC] hover:bg-blue-400 my-10">
+    <button onClick={() => handleButtonClick()} className="text-white place-items-center px-12 py-4 sm:w-fit rounded-full font-semibold text-lg lg:text-xl bg-[#3790d7] hover:bg-blue-400 my-10">
       {buttonText}
     </button>
   );

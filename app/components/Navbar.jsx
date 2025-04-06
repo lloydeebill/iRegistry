@@ -28,9 +28,9 @@ const Navbar = () => {
         <nav className='fixed top-0 left-0 right-0 z-10 bg-[#F1F1F1] bg-opacity-90'>
             <div className="flex flex-wrap items-center justify-between mx-auto px-10 py-2">
             <Image 
-            src="/elcrlogo.svg"
-            alt="/eLCR Logo"
-            width={100}
+            src="/iregistry.png"
+            alt="/iRegistry Logo"
+            width={300}
             height={0}
             sizes="100vw"
             className='object-contain'/>

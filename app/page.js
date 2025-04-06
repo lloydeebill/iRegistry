@@ -11,11 +11,10 @@ export default function Home() {
       <Navbar/>
       <div className="container mt-20 mx-auto px-12 py-0">
         <HeroSection/>
-        <PoweredBy/>
         <AboutSection/>
         <CalltoAction/>
+        <Footer/>
       </div>
-      <div className='mt-10 border-t border-gray-300'><Footer/></div>
     </main>
   )
 }

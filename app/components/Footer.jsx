@@ -9,9 +9,9 @@ const Footer = () => {
       <div className="flex max-md:flex-col flex-wrap justify-between gap-5 sm:px-16 px-6 py-5 ">
         <div className="flex flex-col justify-start items-start gap-2">
             <Image 
-            src="/elcrlogo.svg"
+            src="/iregistry.png"
             alt="/eLCR Logo"
-            width={60}
+            width={200}
             height={10}
             className='object-contain'/>
             <p className="text-base">
@@ -45,10 +45,10 @@ const Footer = () => {
         </div>
 
         <div className="flex justify-between items-center flex-wrap 
-        mt-10 border-t border-gray-300 sm:px-16 px-6 py-2 ">
-          <p className="flex-1 flex max-sm:mt-4 gap-10">@2023 LCR OFFICE BTA. All Rights Reserved</p>
+        border-t border-gray-300 sm:px-16 px-6 py-2">
+          <p className="flex-1 flex max-sm:mt-4 gap-10 mt-4">@LARIOSA QUEZZAGAN 2025. All Rights Reserved</p>
           <div
-          className="flex-1 flex sm:justify-end justify-center max-sm:mt-4 gap-10">
+          className="flex-1 flex sm:justify-end justify-center max-sm:mt-4 gap-10 mt-4">
             <Link href="/"
             className=" hover:text-blue-400">
               Privacy Policy
