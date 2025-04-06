@@ -4,12 +4,15 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "iRegistry ",
+  title: "iRegistry",
   description: "A web based civil registry request system",
   icons: {
-    icon: "/iregistry.svg",
+    icon: [
+      { url: "/iregistry-logo.png", type: "image/png" },
+    ],
   },
 };
+
 
 export default function RootLayout({ children }) {
   return (
