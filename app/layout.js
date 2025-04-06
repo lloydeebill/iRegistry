@@ -6,6 +6,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "iRegistry ",
   description: "A web based civil registry request system",
+  icons: {
+    icon: "/iregistry.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
