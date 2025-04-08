@@ -4,18 +4,17 @@ import React from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Form from "../../components/Form"; // your actual form component
+import FooterBanner from "@/app/components/FooterBanner";
 
 export default function BirthFormPage() {
 	return (
-		<main>
+		<main className="flex min-h-screen flex-col bg-[#F1F1F1] container mx-auto px-12 py-4">
 			<Navbar />
-			<div className="mt-24 container mx-auto px-6">
-				<h1 className="text-3xl font-bold mb-6 text-center">
-					Birth Registration Form
-				</h1>
+			<div className="mt-28 container mx-auto px-12 py-0">
 				<Form />
+				<FooterBanner />
+				<Footer />
 			</div>
-			<Footer />
 		</main>
 	);
 }

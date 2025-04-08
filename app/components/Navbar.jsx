@@ -25,14 +25,14 @@ const Navbar = () => {
 	const [navbarOpen, setNavbarOpen] = useState(false);
 	return (
 		<nav className="fixed top-0 left-0 right-0 z-10 bg-[#F1F1F1] bg-opacity-90">
-			<div className="flex flex-wrap items-center justify-between mx-auto px-10 py-2">
+			<div className="max-w-8xl mx-auto px-4 lg:px-44 py-2 flex items-center justify-between">
 				<Image
 					src="/iregistry.png"
 					alt="/iRegistry Logo"
-					width={300}
+					width={150}
 					height={0}
 					sizes="100vw"
-					className="object-contain"
+					className="h-auto sm:w-[200px] lg:w-[300px] object-contain"
 				/>
 				<div className="mobile-menu block md:hidden">
 					{!navbarOpen ? (
