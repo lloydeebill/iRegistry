@@ -30,6 +30,7 @@ function Form() {
 			<h1 className="text-xl text-center text-blue-600 mb-6">
 				Registration of Live Birth
 			</h1>
+			<hr className="my-4 border-t-4 border-gray-700" />
 
 			<form onSubmit={handleSubmit} className="space-y-4">
 				<div>
@@ -131,6 +132,693 @@ function Form() {
 						className="block w-full text-sm"
 					/>
 				</div>
+
+				{/* Additional Registration Details */}
+
+<div className="mt-6 space-y-4">
+	{/* First Name */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			First Name (Ngalan sa bata/tao nga iparehistro):
+		</label>
+		<input type="text" name="child_firstname" placeholder="e.g. Juan" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+	</div>
+
+	{/* Middle Name */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Middle Name (Middle name sa bata/tao nga iparehistro):
+		</label>
+		<input type="text" name="child_middlename" placeholder="e.g. Santos" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+	</div>
+
+	{/* Last Name */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Last Name (Last name sa bata/tao nga iparehistro):
+		</label>
+		<input type="text" name="child_lastname" placeholder="e.g. Dela Cruz" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+	</div>
+
+	{/* Date of Birth */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Date of Birth (Adlaw sa pag-anak sa bata/tao nga iparehistro):
+		</label>
+		<input type="date" name="birthdate" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+	</div>
+
+	{/* Place of Birth */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Place of Birth (Asa gi-anak ang bata/tao nga iparehistro?):
+		</label>
+		<input type="text" name="birthplace" placeholder="e.g. Butuan City Hospital" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+	</div>
+
+	{/* Type of Birth */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Type of Birth (Ex. Single, Twin, Triplet, etc.):
+		</label>
+		<div className="space-y-1">
+			<label className="flex items-center space-x-2">
+				<input type="radio" name="type_of_birth" value="Single" onChange={handleChanges} className="w-4 h-4" />
+				<span>Single</span>
+			</label>
+			<label className="flex items-center space-x-2">
+				<input type="radio" name="type_of_birth" value="Twin" onChange={handleChanges} className="w-4 h-4" />
+				<span>Twin</span>
+			</label>
+			<label className="flex items-center space-x-2">
+				<input type="radio" name="type_of_birth" value="Triplet" onChange={handleChanges} className="w-4 h-4" />
+				<span>Triplet</span>
+			</label>
+			<label className="flex items-center space-x-2">
+				<input type="radio" name="type_of_birth" value="Other" onChange={handleChanges} className="w-4 h-4" />
+				<span>Other</span>
+				<input type="text" name="child_firstname" placeholder="Quintuplet" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+			</label>
+		</div>
+	</div>
+
+		{/* If multiple birth, child was */}
+		<div>
+			<label className="text-sm font-bold text-gray-600 block mb-1">
+				If multiple birth, child was:
+			</label>
+			<div className="space-y-1">
+				<label className="flex items-center space-x-2">
+					<input type="radio" name="multiple_birth_order" value="First" onChange={handleChanges} className="w-4 h-4" />
+					<span>First</span>
+				</label>
+				<label className="flex items-center space-x-2">
+					<input type="radio" name="multiple_birth_order" value="Second" onChange={handleChanges} className="w-4 h-4" />
+					<span>Second</span>
+				</label>
+				<label className="flex items-center space-x-2">
+					<input type="radio" name="multiple_birth_order" value="Third" onChange={handleChanges} className="w-4 h-4" />
+					<span>Third</span>
+				</label>
+				<label className="flex items-center space-x-2">
+					<input type="radio" name="multiple_birth_order" value="Other" onChange={handleChanges} className="w-4 h-4" />
+					<span>Other</span>
+					<input type="text" name="child_firstname" placeholder="Fourth" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+				</label>
+			</div>	
+		</div>
+
+	{/* Birth Order */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Birth Order (Ikapila nga anak apil na ang namatay):
+	</label>
+	<div className="space-y-1">
+		<label className="flex items-center space-x-2">
+			<input type="radio" name="birth_order" value="First" onChange={handleChanges} className="w-4 h-4" />
+			<span>First</span>
+		</label>
+		<label className="flex items-center space-x-2">
+			<input type="radio" name="birth_order" value="Second" onChange={handleChanges} className="w-4 h-4" />
+			<span>Second</span>
+		</label>
+		<label className="flex items-center space-x-2">
+			<input type="radio" name="birth_order" value="Third" onChange={handleChanges} className="w-4 h-4" />
+			<span>Third</span>
+		</label>
+		<label className="flex items-center space-x-2">
+			<input type="radio" name="birth_order" value="Fourth" onChange={handleChanges} className="w-4 h-4" />
+			<span>Fourth</span>
+		</label>
+		<label className="flex items-center space-x-2">
+			<input type="radio" name="birth_order" value="Fifth" onChange={handleChanges} className="w-4 h-4" />
+			<span>Fifth</span>
+		</label>
+		<label className="flex items-center space-x-2">
+			<input type="radio" name="birth_order" value="Other" onChange={handleChanges} className="w-4 h-4" />
+			<span>Other</span>
+			<input
+				type="text"
+				name="birth_order_other"
+				pl		aceholder="Please specify"
+				onChange={handleChanges}
+				className="block w-full p-2 rounded text-sm border border-gray-300"
+			/>
+		</label>
+	</div>
+</div>
+
+
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Weight at Birth (optional):
+		</label>
+		<input type="text" name="birth_weight" placeholder="e.g. 7 pounds or 2,000 grams" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+	</div>
+
+	{/* Attendant */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Attendant (Nanabang sa pag-anak):
+		</label>
+		<div className="space-y-1">
+			{["Physician", "Nurse", "Midwife", "Hilot", "Other"].map((label) => (
+				<label key={label} className="flex items-center space-x-2">
+					<input type="radio" name="attendant" value={label} onChange={handleChanges} className="w-4 h-4" />
+					<span>{label}</span>
+				</label>
+			))}
+		</div>
+
+	</div>
+
+	{/* Name of Attendant */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Name of Attendant:
+		</label>
+		<input type="text" name="attendant_name" placeholder="e.g. Dr. Jose Rizal" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+	</div>
+
+	{/* Position of Attendant */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Position of Attendant:
+		</label>
+		<input type="text" name="attendant_position" placeholder="e.g. Midwife" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+	</div>
+
+	{/* Address of the Attendant */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Address of the Attendant:
+		</label>
+		<input type="text" name="attendant_address" placeholder="e.g. Purok 1, Brgy. Mahay" onChange={handleChanges} className="block w-full p-2 rounded text-sm border border-gray-300" />
+	</div>
+
+	{/* Are parents married */}
+	<div>
+		<label className="text-sm font-bold text-gray-600 block mb-1">
+			Are the parents of the child/person to be registered married?
+		</label>
+		<div className="space-y-1">
+			<label className="flex items-center space-x-2">
+				<input type="radio" name="parents_married" value="Yes" onChange={handleChanges} className="w-4 h-4" />
+				<span>Yes</span>
+			</label>
+			<label className="flex items-center space-x-2">
+				<input type="radio" name="parents_married" value="No" onChange={handleChanges} className="w-4 h-4" />
+				<span>No</span>
+			</label>
+		</div>
+	</div>
+</div>
+
+				{/* Date of Marriage */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Date of Marriage (Petsa sa kasal sa ginikanan):
+	</label>
+	<input
+		type="date"
+		name="marriage_date"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* City/Municipality of Marriage */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		City/Municipality of Marriage (Aha nga syudad/munisipyo gikasal ang ginikanan):
+	</label>
+	<input
+		type="text"
+		name="marriage_city"
+		placeholder="Enter City or Municipality"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Province of Marriage */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Province of Marriage (Probinsya kung aha gikasal ang ginikanan):
+	</label>
+	<input
+		type="text"
+		name="marriage_province"
+		placeholder="Enter Province"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Country of Marriage */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Country of Marriage (Nasud kung aha gikasal ang ginikanan):
+	</label>
+	<input
+		type="text"
+		name="marriage_country"
+		placeholder="Enter Country"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Marriage Certificate Upload */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Marriage Certificate (Sertipikasyon sa pagkasal sa ginikanan):
+	</label>
+	<input
+		type="file"
+		name="marriage_certificate"
+		accept="image/*"
+		onChange={handleChanges}
+		required
+		className="block w-full text-sm"
+	/>
+	<p className="text-xs text-gray-500 mt-1">Upload 1 supported file: image. Max 10 MB.</p>
+</div>
+
+<hr className="my-4 border-t-4 border-gray-700" />
+
+{/* Information of the Father (Impormasyon sa amahan sa bata/tao nga iparehistro) */}
+<div>
+	<label className="text-lg font-bold text-gray-600 block mb-3">
+		INFORMATION OF THE FATHER 
+			(Impormasyon sa amahan sa bata/tao nga iparehistro)
+	</label>
+</div>
+
+{/* Father's First Name */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		First Name of the Father (Ngalan sa amahan sa bata/tao nga iparehistro):
+	</label>
+	<input
+		type="text"
+		name="father_firstname"
+		placeholder="Enter First Name"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Father's Middle Name */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Middle Name of the Father (Middle name sa amahan sa bata/tao nga iparehistro):
+	</label>
+	<input
+		type="text"
+		name="father_middlename"
+		placeholder="Enter Middle Name"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Father's Last Name */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Last Name of the Father (Apelyido sa amahan sa bata/tao nga iparehistro):
+	</label>
+	<input
+		type="text"
+		name="father_lastname"
+		placeholder="Enter Last Name"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Nationality/Citizenship */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Nationality/Citizenship (Ex. Filipino, Japanese, Chinese, American):
+	</label>
+	<input
+		type="text"
+		name="father_nationality"
+		placeholder="Enter Nationality"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Religion */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Religion (Ex. Roman Catholic, Islam, Born Again, Jehovah’s Witnesses, Faith Baptist):
+	</label>
+	<input
+		type="text"
+		name="father_religion"
+		placeholder="Enter Religion"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Occupation */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Occupation (Trabaho sa amahan, Ex. Farmer, Government employee, Seaman, Driver, Doctor):
+	</label>
+	<input
+		type="text"
+		name="father_occupation"
+		placeholder="Enter Occupation"
+		onChange={handleChanges}
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Father's Age at Birth */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Father's age at the time of birth of the child/person to be registered (Edad sa amahan sa adlaw nga gipanganak ang bata/tao nga iparehistro):
+	</label>
+	<input
+		type="number"
+		name="father_age_at_birth"
+		placeholder="Enter Age"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Father's Date of Birth */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Father's Date of Birth (Adlaw nga natawo ang amahan):
+	</label>
+	<input
+		type="date"
+		name="father_dob"
+		onChange={handleChanges}
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Father's Residence */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Residence (Ex. Barangay, City/Municipality, Province, Country - Aha nagpuyo ang amahan):
+	</label>
+	<input
+		type="text"
+		name="father_residence"
+		placeholder="Enter Full Address"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Father's Valid ID */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Valid ID of the Father:
+	</label>
+	<input
+		type="file"
+		name="father_valid_id"
+		accept="image/*"
+		onChange={handleChanges}
+		required
+		className="block w-full text-sm"
+	/>
+	<p className="text-xs text-gray-500 mt-1">
+		Upload 1 supported file: image. Max 10 MB.
+	</p>
+</div>
+
+<hr className="my-4 border-t-4 border-gray-700" />
+
+{/* Information of the Mother*/}
+<div>
+	<label className="text-lg font-bold text-gray-600 block mb-3">
+		INFORMATION OF THE MOTHER (Impormasyon sa inahan sa bata/tao nga iparehistro)
+	</label>
+</div>
+
+
+{/* Mother's First Name */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		First Name of the Mother (Ngalan sa inahan sa bata/tao nga iparehistro):
+	</label>
+	<input
+		type="text"
+		name="mother_firstname"
+		placeholder="Enter First Name"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Mother's Middle Name */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Middle Name of the Mother (Middle name sa inahan sa bata/tao nga iparehistro):
+	</label>
+	<input
+		type="text"
+		name="mother_middlename"
+		placeholder="Enter Middle Name"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Mother's Last Name */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Last Name of the Mother (Apelyido sa inahan sa bata/tao nga iparehistro):
+	</label>
+	<input
+		type="text"
+		name="mother_lastname"
+		placeholder="Enter Last Name"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Nationality/Citizenship */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Nationality/Citizenship (Ex. Filipino, Japanese, Chinese, American):
+	</label>
+	<input
+		type="text"
+		name="mother_nationality"
+		placeholder="Enter Nationality"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Religion */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Religion (Ex. Roman Catholic, Islam, Born Again, Jehovah’s Witnesses, Faith Baptist): *PLEASE TARUNGAG SPELLING*
+	</label>
+	<input
+		type="text"
+		name="mother_religion"
+		placeholder="Enter Religion"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Occupation */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Occupation (Trabaho sa inahan, Ex. Teacher, Government employee, Doctor):
+	</label>
+	<input
+		type="text"
+		name="mother_occupation"
+		placeholder="Enter Occupation"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Mother's Age at Birth */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Mother's age at the time of birth of the child/person to be registered (Edad sa inahan sa adlaw nga gipanganak ang bata/tao nga iparehistro):
+	</label>
+	<input
+		type="number"
+		name="mother_age_at_birth"
+		placeholder="Enter Age"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Mother's Date of Birth */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Mother's Date of Birth (Adlaw na natao ang inahan):
+	</label>
+	<input
+		type="date"
+		name="mother_dob"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Residence */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Residence (Ex. Barangay, City/Municipality, Province, Country – Aha nagpuyo ang inahan):
+	</label>
+	<input
+		type="text"
+		name="mother_residence"
+		placeholder="Enter Full Address"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* Valid ID of the Mother */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Valid ID of the Mother:
+	</label>
+	<input
+		type="file"
+		name="mother_valid_id"
+		accept="image/*"
+		onChange={handleChanges}
+		required
+		className="block w-full text-sm"
+	/>
+	<p className="text-xs text-gray-500 mt-1">
+		Upload 1 supported file: image. Max 10 MB.
+	</p>
+</div>
+
+{/* Total number of children born alive */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		Total number of children born alive (Pila tanan ang gipanganak nga buhi sa inahan apil ang tao nga iparehistro):
+	</label>
+	<input
+		type="number"
+		name="children_born_alive"
+		placeholder="Enter total number"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* No. of children still living */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		No. of children still living including this birth (Pila tanan ang anak nga buhi pa hantod karon apil ang iparehistro):
+	</label>
+	<input
+		type="number"
+		name="children_still_living"
+		placeholder="Enter number of living children"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+{/* No. of children previously born alive but are now dead */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-1">
+		No. of children previously born alive but are now dead (Pila tanan ang gipanganak nga buhi pero patay na):
+	</label>
+	<input
+		type="number"
+		name="children_deceased"
+		placeholder="Enter number of deceased children"
+		onChange={handleChanges}
+		required
+		className="block w-full p-2 rounded text-sm border border-gray-300"
+	/>
+</div>
+
+<hr className="my-4 border-t-4 border-gray-700" />
+
+{/* Consent, Terms and Conditions */}
+<div>
+	<label className="text-sm font-bold text-gray-600 block mb-2">
+		CONSENT, TERMS AND CONDITIONS (Last part of the form)
+	</label>
+	<p className="text-sm text-gray-700 mb-3">
+		I, hereby consent to the following:
+		<br /><br />
+		- I authorize the Local Civil Registry Office of Buenavista, Agusan del Norte to collect and use my personal information for the purpose of applying for the certificate of live birth. <br />
+		- I understand that I have the right to access my personal information and to request that it be corrected or deleted. <br />
+		- I certify that the information I have provided is true and accurate.
+	</p>
+
+	<div className="space-y-1">
+		<label className="flex items-center space-x-2">
+			<input
+				type="radio"
+				name="consent"
+				value="Yes"
+				onChange={handleChanges}
+				required
+				className="w-4 h-4"
+			/>
+			<span>Yes</span>
+		</label>
+		<label className="flex items-center space-x-2">
+			<input
+				type="radio"
+				name="consent"
+				value="No"
+				onChange={handleChanges}
+				className="w-4 h-4"
+			/>
+			<span>No</span>
+		</label>
+	</div>
+</div>
+
+<hr className="my-4 border-t-4 border-gray-700" />	
+
+
 
 				<div className="flex justify-between mt-4">
 					<button
