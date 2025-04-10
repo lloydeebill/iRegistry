@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
+import { uploadFile } from "@/utils/uploadFile";
 
 function Form() {
 	const [values, setValues] = useState({
@@ -8,7 +9,7 @@ function Form() {
 		address: "",
 		contact: "",
 		sex: "",
-		image: null,
+		image_url: imageUrl,
 		child_firstname: "",
 		child_middlename: "",
 		child_lastname: "",
@@ -30,7 +31,7 @@ function Form() {
 		marriage_city: "",
 		marriage_province: "",
 		marriage_country: "",
-		marriage_certificate: null,
+		marriage_certificate: marriageCertUrl,
 		father_firstname: "",
 		father_middlename: "",
 		father_lastname: "",
@@ -40,7 +41,7 @@ function Form() {
 		father_age_at_birth: "",
 		father_dob: "",
 		father_residence: "",
-		father_valid_id: null,
+		father_valid_id: fatherIdUrl,
 		mother_firstname: "",
 		mother_middlename: "",
 		mother_lastname: "",
@@ -50,7 +51,7 @@ function Form() {
 		mother_age_at_birth: "",
 		mother_dob: "",
 		mother_residence: "",
-		mother_valid_id: null,
+		mother_valid_id: motherIdUrl,
 		children_born_alive: "",
 		children_still_living: "",
 		children_deceased: "",
@@ -67,6 +68,14 @@ function Form() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		const imageUrl = await uploadFile(values.image, "images");
+		const marriageCertUrl = await uploadFile(
+			values.marriage_certificate,
+			"certificates"
+		);
+		const fatherIdUrl = await uploadFile(values.father_valid_id, "ids/father");
+		const motherIdUrl = await uploadFile(values.mother_valid_id, "ids/mother");
 		const { error } = await supabase.from("birth_registration").insert([
 			{
 				fullname: values.fullname,
