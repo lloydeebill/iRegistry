@@ -1,3 +1,4 @@
+import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
 
 function Form() {
@@ -30,7 +31,6 @@ function Form() {
 		marriage_province: "",
 		marriage_country: "",
 		marriage_certificate: null,
-		consent: "",
 		father_firstname: "",
 		father_middlename: "",
 		father_lastname: "",
@@ -54,6 +54,7 @@ function Form() {
 		children_born_alive: "",
 		children_still_living: "",
 		children_deceased: "",
+		consent: "",
 	});
 
 	const handleChanges = (e) => {
@@ -66,7 +67,69 @@ function Form() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(values);
+		const {error} = await supabase.from("birth_registration").insert([
+			{
+				fullname: values.fullname,
+				relationship: values.relationship,
+				address: values.address,
+				contact: values.contact,
+				sex: values.sex,
+				image: values.image ? values.image.name : null,
+				child_firstname: values.child_firstname,
+				child_middlename: values.child_middlename,
+				child_lastname: values.child_lastname,
+				attendant_name: values.attendant_name,
+				attendant_address: values.attendant_address,
+				attendant_position: values.attendant_position,
+				birthdate: values.birthdate,
+				birthplace: values.birthplace,
+				type_of_birth: values.type_of_birth,
+				type_of_birth_other: values.type_of_birth_other,
+				multiple_birth_order: values.multiple_birth_order,
+				multiple_birth_order_other: values.multiple_birth_order_other,
+				birth_order: values.birth_order,
+				birth_order_other: values.birth_order_other,
+				birth_weight: values.birth_weight,
+				attendant: values.attendant,
+				parents_married: values.parents_married,
+				marriage_date: values.marriage_date,
+				marriage_city: values.marriage_city,
+				marriage_province: values.marriage_province,
+				marriage_country: values.marriage_country,
+				marriage_certificate: values.marriage_certificate ? values.marriage_certificate.name : null,
+				father_firstname: values.father_firstname,
+				father_middlename: values.father_middlename,
+				father_lastname: values.father_lastname,
+				father_nationality: values.father_nationality,
+				father_religion: values.father_religion,
+				father_occupation: values.father_occupation,
+				father_age_at_birth: values.father_age_at_birth,
+				father_dob: values.father_dob,
+				father_residence: values.father_residence,
+				father_valid_id: values.father_valid_id ? values.father_valid_id.name : null,
+				mother_firstname: values.mother_firstname,
+				mother_middlename: values.mother_middlename,
+				mother_lastname: values.mother_lastname,
+				mother_nationality: values.mother_nationality,
+				mother_religion: values.mother_religion,
+				mother_occupation: values.mother_occupation,
+				mother_age_at_birth: values.mother_age_at_birth,
+				mother_dob: values.mother_dob,
+				mother_residence: values.mother_residence,
+				mother_valid_id: values.mother_valid_id ? values.mother_valid_id.name : null,
+				children_born_alive: values.children_born_alive,
+				children_still_living: values.children_still_living,
+				children_deceased: values.children_deceased,
+				consent: values.consent
+			},
+		]);
+		
+	if (error) {
+		console.error("Insert error:", error.message);
+	} else {
+		alert("Form submitted to Supabase!");
+		ResetFun(); // Optional: clear form after submission
+	}
 	};
 
 	const ResetFun = () => {
