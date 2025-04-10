@@ -65,9 +65,9 @@ function Form() {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const {error} = await supabase.from("birth_registration").insert([
+		const { error } = await supabase.from("birth_registration").insert([
 			{
 				fullname: values.fullname,
 				relationship: values.relationship,
@@ -96,7 +96,9 @@ function Form() {
 				marriage_city: values.marriage_city,
 				marriage_province: values.marriage_province,
 				marriage_country: values.marriage_country,
-				marriage_certificate: values.marriage_certificate ? values.marriage_certificate.name : null,
+				marriage_certificate: values.marriage_certificate
+					? values.marriage_certificate.name
+					: null,
 				father_firstname: values.father_firstname,
 				father_middlename: values.father_middlename,
 				father_lastname: values.father_lastname,
@@ -106,7 +108,9 @@ function Form() {
 				father_age_at_birth: values.father_age_at_birth,
 				father_dob: values.father_dob,
 				father_residence: values.father_residence,
-				father_valid_id: values.father_valid_id ? values.father_valid_id.name : null,
+				father_valid_id: values.father_valid_id
+					? values.father_valid_id.name
+					: null,
 				mother_firstname: values.mother_firstname,
 				mother_middlename: values.mother_middlename,
 				mother_lastname: values.mother_lastname,
@@ -116,20 +120,22 @@ function Form() {
 				mother_age_at_birth: values.mother_age_at_birth,
 				mother_dob: values.mother_dob,
 				mother_residence: values.mother_residence,
-				mother_valid_id: values.mother_valid_id ? values.mother_valid_id.name : null,
+				mother_valid_id: values.mother_valid_id
+					? values.mother_valid_id.name
+					: null,
 				children_born_alive: values.children_born_alive,
 				children_still_living: values.children_still_living,
 				children_deceased: values.children_deceased,
-				consent: values.consent
+				consent: values.consent,
 			},
 		]);
-		
-	if (error) {
-		console.error("Insert error:", error.message);
-	} else {
-		alert("Form submitted to Supabase!");
-		ResetFun(); // Optional: clear form after submission
-	}
+
+		if (error) {
+			console.error("Insert error:", error.message);
+		} else {
+			alert("Form submitted to Supabase!");
+			ResetFun(); // Optional: clear form after submission
+		}
 	};
 
 	const ResetFun = () => {
