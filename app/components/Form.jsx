@@ -136,7 +136,7 @@ function Form() {
 		if (error) {
 			console.error("Insert error:", error.message);
 		} else {
-			alert("Form submitted to Supabase!");
+			alert("Form submitted to database, thank you for using iRegistry!");
 			ResetFun(); // Optional: clear form after submission
 		}
 	};
