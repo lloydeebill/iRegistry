@@ -9,7 +9,7 @@ function Form() {
 		address: "",
 		contact: "",
 		sex: "",
-		image_url: imageUrl,
+		image_url: "",
 		child_firstname: "",
 		child_middlename: "",
 		child_lastname: "",
