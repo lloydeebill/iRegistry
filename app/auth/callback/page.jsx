@@ -1,30 +1,29 @@
-// app/auth/callback/page.jsx
 "use client";
 
 import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function AuthCallback() {
 	const router = useRouter();
-	const searchParams = useSearchParams();
 
 	useEffect(() => {
-		const handleRedirect = async () => {
+		const getSessionAndRedirect = async () => {
 			const {
 				data: { session },
 			} = await supabase.auth.getSession();
 
 			if (session) {
-				const next = searchParams.get("next") || "/";
-				router.push(next);
-			} else {
-				console.error("No session found.");
+				router.push("/regcolb"); // change this to where you want to redirect after login
 			}
 		};
 
-		handleRedirect();
-	}, [router, searchParams]);
+		getSessionAndRedirect();
+	}, [router]);
 
-	return <p>Redirecting...</p>;
+	return (
+		<div className="min-h-screen flex items-center justify-center">
+			<p className="text-gray-600 text-lg">Signing you in...</p>
+		</div>
+	);
 }
