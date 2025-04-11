@@ -23,6 +23,18 @@ const RegColB = () => {
 		};
 
 		getUser();
+
+		// 🔄 Listen for auth state changes (login/logout)
+		const { data: listener } = supabase.auth.onAuthStateChange(
+			(_event, session) => {
+				setUser(session?.user || null);
+			}
+		);
+
+		// 🧹 Clean up the listener on unmount
+		return () => {
+			listener?.subscription?.unsubscribe();
+		};
 	}, []);
 
 	return (
@@ -38,11 +50,14 @@ const RegColB = () => {
 					<div className="mt-7 text-blue-500 text-center text-sm lg:text-start lg:text-xl mb-4">
 						{user ? (
 							<p className="text-black">
-								Signed in as:{" "}
+								User:{" "}
 								<span className="font-medium text-blue-600">{user.email}</span>
 							</p>
 						) : (
-							<p className="text-gray-600">Not signed in</p>
+							<p className="text-black">
+								User:{" "}
+								<span className="font-medium text-blue-600">Not signed in</span>
+							</p>
 						)}
 					</div>
 				</div>

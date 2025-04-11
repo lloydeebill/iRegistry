@@ -26,6 +26,16 @@ const Navbar = () => {
 		};
 
 		getUser();
+
+		const { data: listener } = supabase.auth.onAuthStateChange(
+			(_event, session) => {
+				setUser(session?.user || null);
+			}
+		);
+
+		return () => {
+			listener?.subscription?.unsubscribe();
+		};
 	}, []);
 
 	const handleSignIn = async () => {
@@ -49,14 +59,38 @@ const Navbar = () => {
 			<div className="max-w-8xl mx-auto px-4 lg:px-44 py-2 flex items-center justify-between">
 				<Image
 					src="/iregistry.png"
-					alt="/iRegistry Logo"
+					alt="iRegistry Logo"
 					width={150}
 					height={0}
 					sizes="100vw"
 					className="h-auto sm:w-[200px] lg:w-[300px] object-contain"
 				/>
 
-				<div className="mobile-menu block md:hidden">
+				{/* Desktop Nav */}
+				<div className="hidden md:flex text-xl items-center space-x-8 font-medium">
+					{navLinks.map((link, index) => (
+						<NavLink key={index} href={link.path} title={link.title} />
+					))}
+
+					{!user ? (
+						<button
+							onClick={handleSignIn}
+							className="text-blue-700 hover:text-blue-400 transition"
+						>
+							Sign In
+						</button>
+					) : (
+						<button
+							onClick={handleSignOut}
+							className="text-red-700 hover:text-red-400 transition"
+						>
+							Sign Out
+						</button>
+					)}
+				</div>
+
+				{/* Mobile Toggle Button */}
+				<div className="block md:hidden">
 					{!navbarOpen ? (
 						<button
 							onClick={() => setNavbarOpen(true)}
@@ -73,34 +107,17 @@ const Navbar = () => {
 						</button>
 					)}
 				</div>
-
-				<div className="hidden md:flex text-xl items-center space-x-8 font-medium">
-					<NavLink href="/" title="Home" />
-
-					{navLinks.slice(1).map((link, index) => (
-						<NavLink key={index} href={link.path} title={link.title} />
-					))}
-
-					{!user ? (
-						<button
-							onClick={handleSignIn}
-							className="text-blue-600 hover:text-blue-500 transition"
-						>
-							Sign In
-						</button>
-					) : (
-						<button
-							onClick={handleSignOut}
-							className="text-red-600 hover:text-red-500 transition"
-						>
-							Sign Out
-						</button>
-					)}
-				</div>
 			</div>
 
-			{/* Mobile menu */}
-			{navbarOpen ? <MenuOverlay links={navLinks} /> : null}
+			{/* Mobile Menu Overlay */}
+			{navbarOpen && (
+				<MenuOverlay
+					links={navLinks}
+					user={user}
+					handleSignIn={handleSignIn}
+					handleSignOut={handleSignOut}
+				/>
+			)}
 		</nav>
 	);
 };
