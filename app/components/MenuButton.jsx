@@ -1,6 +1,40 @@
+"use client";
+
 import { Menu } from "@headlessui/react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
 
 const MenuButton = ({ buttonText, options, hrefs, isRegisterButton }) => {
+	const router = useRouter();
+
+	const handleClick = async (href) => {
+		try {
+			const {
+				data: { session },
+			} = await supabase.auth.getSession();
+
+			if (session) {
+				router.push(href);
+			} else {
+				const origin = window.location.origin;
+				const redirectTo = `${origin}/auth/callback?next=${href}`;
+
+				const { error } = await supabase.auth.signInWithOAuth({
+					provider: "google",
+					options: {
+						redirectTo,
+					},
+				});
+
+				if (error) {
+					console.error("OAuth sign-in error:", error.message);
+				}
+			}
+		} catch (err) {
+			console.error("Unexpected auth error:", err);
+		}
+	};
+
 	return (
 		<Menu as="div" className="relative lg:w-48 mt-2">
 			<Menu.Button
@@ -16,14 +50,14 @@ const MenuButton = ({ buttonText, options, hrefs, isRegisterButton }) => {
 				{options.map((option, index) => (
 					<Menu.Item key={index}>
 						{({ active }) => (
-							<a
-								href={hrefs[index]}
-								className={`block py-3 px-2  text-lg leading-relaxed whitespace-nowrap hover:text-blue-400 ${
-									active ? "text-blue-500" : "text-gray-900 whitespace-nowrap"
+							<button
+								onClick={() => handleClick(hrefs[index])}
+								className={`block py-3 px-2 text-left text-lg leading-relaxed whitespace-nowrap w-full ${
+									active ? "text-blue-500" : "text-gray-900"
 								}`}
 							>
 								{option}
-							</a>
+							</button>
 						)}
 					</Menu.Item>
 				))}

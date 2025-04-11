@@ -136,7 +136,7 @@ function Form() {
 		if (error) {
 			console.error("Insert error:", error.message);
 		} else {
-			alert("Form submitted to database, thank you for using iRegistry!");
+			alert("Form details submitted, thank you for using iRegistry!");
 			ResetFun(); // Optional: clear form after submission
 		}
 	};
@@ -200,7 +200,7 @@ function Form() {
 
 	return (
 		<div className="max-w-2xl mx-auto bg-white shadow-md rounded p-8 sm:my-5 lg:my-10">
-			<h1 className="text-xl text-center text-blue-600 mb-6">
+			<h1 className="text-xl text-center text-blue-600 mb-6 font-extrabold">
 				Registration of Live Birth
 			</h1>
 			<hr className="my-4 border-t-4 border-gray-700" />
@@ -311,6 +311,11 @@ function Form() {
 				{/* Additional Registration Details */}
 
 				<div className="mt-6 space-y-4">
+					<hr className="my-4 border-t-4 border-gray-700" />
+					<h1 className="text-xl text-center text-blue-600 font-bold mb-6">
+						Certificate of Live Birth
+					</h1>
+
 					{/* First Name */}
 					<div>
 						<label className="text-sm font-bold text-gray-600 block mb-1">
@@ -714,7 +719,7 @@ function Form() {
 
 				{/* Information of the Father (Impormasyon sa amahan sa bata/tao nga iparehistro) */}
 				<div>
-					<label className="text-lg font-bold text-gray-600 block mb-3">
+					<label className="text-lg font-bold text-blue-600 block mb-3">
 						INFORMATION OF THE FATHER (Impormasyon sa amahan sa bata/tao nga
 						iparehistro)
 					</label>
@@ -889,7 +894,7 @@ function Form() {
 
 				{/* Information of the Mother*/}
 				<div>
-					<label className="text-lg font-bold text-gray-600 block mb-3">
+					<label className="text-lg font-bold text-blue-600 block mb-3">
 						INFORMATION OF THE MOTHER (Impormasyon sa inahan sa bata/tao nga
 						iparehistro)
 					</label>
@@ -1157,14 +1162,7 @@ function Form() {
 
 				<hr className="my-4 border-t-4 border-gray-700" />
 
-				<div className="flex justify-between mt-4">
-					<button
-						type="button"
-						onClick={ResetFun}
-						className="px-4 py-2 rounded-md text-white bg-[#4206a3] hover:bg-blue-400 w-2/5"
-					>
-						Reset
-					</button>
+				<div className="flex justify-center mt-4">
 					<button
 						type="submit"
 						className="px-4 py-2 rounded-md text-white bg-[#4206a3] hover:bg-blue-400 w-2/5"
