@@ -8,11 +8,11 @@ function Form() {
 		relationship: "",
 		address: "",
 		contact: "",
-		sex: "",
 		image_url: "",
 		child_firstname: "",
 		child_middlename: "",
 		child_lastname: "",
+		sex: "",
 		attendant_name: "",
 		attendant_address: "",
 		attendant_position: "",
@@ -82,11 +82,11 @@ function Form() {
 				relationship: values.relationship,
 				address: values.address,
 				contact: values.contact,
-				sex: values.sex,
 				image_url: imageUrl,
 				child_firstname: values.child_firstname,
 				child_middlename: values.child_middlename,
 				child_lastname: values.child_lastname,
+				sex: values.sex,
 				attendant_name: values.attendant_name,
 				attendant_address: values.attendant_address,
 				attendant_position: values.attendant_position,
@@ -147,11 +147,11 @@ function Form() {
 			relationship: "",
 			address: "",
 			contact: "",
-			sex: "",
 			image: null,
 			child_firstname: "",
 			child_middlename: "",
 			child_lastname: "",
+			sex: "",
 			attendant_name: "",
 			attendant_address: "",
 			attendant_position: "",
@@ -219,36 +219,6 @@ function Form() {
 						value={values.fullname}
 						className="block w-full p-2 rounded text-sm border border-gray-300"
 					/>
-				</div>
-
-				<div>
-					<label className="text-sm font-bold text-gray-600 block mb-1">
-						Sex:
-					</label>
-					<div className="flex items-center space-x-4">
-						<label className="flex items-center space-x-1">
-							<input
-								type="radio"
-								name="sex"
-								value="Male"
-								checked={values.sex === "Male"}
-								onChange={handleChanges}
-								className="w-4 h-4"
-							/>
-							<span>Male</span>
-						</label>
-						<label className="flex items-center space-x-1">
-							<input
-								type="radio"
-								name="sex"
-								value="Female"
-								checked={values.sex === "Female"}
-								onChange={handleChanges}
-								className="w-4 h-4"
-							/>
-							<span>Female</span>
-						</label>
-					</div>
 				</div>
 
 				<div>
@@ -359,6 +329,36 @@ function Form() {
 							value={values.child_lastname}
 							className="block w-full p-2 rounded text-sm border border-gray-300"
 						/>
+					</div>
+
+					<div>
+						<label className="text-sm font-bold text-gray-600 block mb-1">
+							Sex:
+						</label>
+						<div className="flex items-center space-x-4">
+							<label className="flex items-center space-x-1">
+								<input
+									type="radio"
+									name="sex"
+									value="Male"
+									checked={values.sex === "Male"}
+									onChange={handleChanges}
+									className="w-4 h-4"
+								/>
+								<span>Male</span>
+							</label>
+							<label className="flex items-center space-x-1">
+								<input
+									type="radio"
+									name="sex"
+									value="Female"
+									checked={values.sex === "Female"}
+									onChange={handleChanges}
+									className="w-4 h-4"
+								/>
+								<span>Female</span>
+							</label>
+						</div>
 					</div>
 
 					{/* Date of Birth */}
