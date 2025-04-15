@@ -3,6 +3,7 @@
 import { Menu } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
+import { signInWithGoogle } from "@/lib/auth";
 
 const MenuButton = ({ buttonText, options, hrefs, isRegisterButton }) => {
 	const router = useRouter();
@@ -16,15 +17,7 @@ const MenuButton = ({ buttonText, options, hrefs, isRegisterButton }) => {
 			if (session) {
 				router.push(href);
 			} else {
-				const origin = window.location.origin;
-				const redirectTo = `${origin}/auth/callback?next=${href}`;
-
-				const { error } = await supabase.auth.signInWithOAuth({
-					provider: "google",
-					options: {
-						redirectTo,
-					},
-				});
+				await signInWithGoogle();
 
 				if (error) {
 					console.error("OAuth sign-in error:", error.message);
