@@ -1,8 +1,12 @@
 import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
 import { uploadFile } from "@/utils/uploadFile";
+import GcashModal from "./GcashModal";
 
 function Form() {
+	//gcash modal
+	const [showQR, setShowQR] = useState(true);
+
 	const [values, setValues] = useState({
 		fullname: "",
 		relationship: "",
@@ -136,7 +140,7 @@ function Form() {
 		if (error) {
 			console.error("Insert error:", error.message);
 		} else {
-			alert("Form details submitted, thank you for using iRegistry!");
+			setShowQR(true);
 			ResetFun(); // Optional: clear form after submission
 		}
 	};
@@ -1171,6 +1175,11 @@ function Form() {
 					</button>
 				</div>
 			</form>
+			<GcashModal
+				show={showQR}
+				onClose={() => setShowQR(false)}
+				submittedData={values} // or whatever holds your current form state
+			/>
 		</div>
 	);
 }
