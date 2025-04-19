@@ -10,7 +10,7 @@ const GcashModal = ({ show, onClose, submittedData }) => {
 	const handleDone = () => {
 		// Pass form data as query string (you can adjust this part if using Supabase ID instead)
 		const query = new URLSearchParams(submittedData).toString();
-		router.push(`/form-preview?${query}`);
+		router.push(`/regcolb/form-preview?${query}`);
 	};
 
 	return (

@@ -2,10 +2,13 @@ import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
 import { uploadFile } from "@/utils/uploadFile";
 import GcashModal from "./GcashModal";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function Form() {
 	//gcash modal
-	const [showQR, setShowQR] = useState(true);
+	const [showQR, setShowQR] = useState(false);
 
 	const [values, setValues] = useState({
 		fullname: "",
@@ -62,6 +65,22 @@ function Form() {
 		consent: "",
 	});
 
+	const searchParams = useSearchParams();
+
+	const router = useRouter();
+
+	useEffect(() => {
+		const updatedValues = { ...values };
+		for (const key in updatedValues) {
+			const param = searchParams.get(key);
+			if (param !== null) {
+				updatedValues[key] = param;
+			}
+		}
+		setValues(updatedValues);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	const handleChanges = (e) => {
 		const { name, type, files, value } = e.target;
 		setValues({
@@ -70,136 +89,15 @@ function Form() {
 		});
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-
-		const imageUrl = await uploadFile(values.image, "images");
-		const marriageCertUrl = await uploadFile(
-			values.marriage_certificate,
-			"certificates"
-		);
-		const fatherIdUrl = await uploadFile(values.father_valid_id, "ids/father");
-		const motherIdUrl = await uploadFile(values.mother_valid_id, "ids/mother");
-		const { error } = await supabase.from("birth_registration").insert([
-			{
-				fullname: values.fullname,
-				relationship: values.relationship,
-				address: values.address,
-				contact: values.contact,
-				image_url: imageUrl,
-				child_firstname: values.child_firstname,
-				child_middlename: values.child_middlename,
-				child_lastname: values.child_lastname,
-				sex: values.sex,
-				attendant_name: values.attendant_name,
-				attendant_address: values.attendant_address,
-				attendant_position: values.attendant_position,
-				birthdate: values.birthdate,
-				birthplace: values.birthplace,
-				type_of_birth: values.type_of_birth,
-				type_of_birth_other: values.type_of_birth_other,
-				multiple_birth_order: values.multiple_birth_order,
-				multiple_birth_order_other: values.multiple_birth_order_other,
-				birth_order: values.birth_order,
-				birth_order_other: values.birth_order_other,
-				birth_weight: values.birth_weight,
-				attendant: values.attendant,
-				parents_married: values.parents_married,
-				marriage_date: values.marriage_date,
-				marriage_city: values.marriage_city,
-				marriage_province: values.marriage_province,
-				marriage_country: values.marriage_country,
-				marriage_certificate: marriageCertUrl,
-				father_firstname: values.father_firstname,
-				father_middlename: values.father_middlename,
-				father_lastname: values.father_lastname,
-				father_nationality: values.father_nationality,
-				father_religion: values.father_religion,
-				father_occupation: values.father_occupation,
-				father_age_at_birth: values.father_age_at_birth,
-				father_dob: values.father_dob,
-				father_residence: values.father_residence,
-				father_valid_id: fatherIdUrl,
-				mother_firstname: values.mother_firstname,
-				mother_middlename: values.mother_middlename,
-				mother_lastname: values.mother_lastname,
-				mother_nationality: values.mother_nationality,
-				mother_religion: values.mother_religion,
-				mother_occupation: values.mother_occupation,
-				mother_age_at_birth: values.mother_age_at_birth,
-				mother_dob: values.mother_dob,
-				mother_residence: values.mother_residence,
-				mother_valid_id: motherIdUrl,
-				children_born_alive: values.children_born_alive,
-				children_still_living: values.children_still_living,
-				children_deceased: values.children_deceased,
-				consent: values.consent,
-			},
-		]);
-
-		if (error) {
-			console.error("Insert error:", error.message);
-		} else {
-			setShowQR(true);
-			ResetFun(); // Optional: clear form after submission
-		}
-	};
-
-	const ResetFun = () => {
-		setValues({
-			fullname: "",
-			relationship: "",
-			address: "",
-			contact: "",
-			image: null,
-			child_firstname: "",
-			child_middlename: "",
-			child_lastname: "",
-			sex: "",
-			attendant_name: "",
-			attendant_address: "",
-			attendant_position: "",
-			birthdate: "",
-			birthplace: "",
-			type_of_birth: "",
-			type_of_birth_other: "",
-			multiple_birth_order: "",
-			multiple_birth_order_other: "",
-			birth_order: "",
-			birth_order_other: "",
-			birth_weight: "",
-			attendant: "",
-			parents_married: "",
-			marriage_date: "",
-			marriage_city: "",
-			marriage_province: "",
-			marriage_country: "",
-			marriage_certificate: null,
-			father_firstname: "",
-			father_middlename: "",
-			father_lastname: "",
-			father_nationality: "",
-			father_religion: "",
-			father_occupation: "",
-			father_age_at_birth: "",
-			father_dob: "",
-			father_residence: "",
-			father_valid_id: null,
-			mother_firstname: "",
-			mother_middlename: "",
-			mother_lastname: "",
-			mother_nationality: "",
-			mother_religion: "",
-			mother_occupation: "",
-			mother_age_at_birth: "",
-			mother_dob: "",
-			mother_residence: "",
-			mother_valid_id: null,
-			children_born_alive: "",
-			children_still_living: "",
-			children_deceased: "",
-			consent: "",
+		const queryParams = new URLSearchParams();
+		Object.entries(values).forEach(([key, value]) => {
+			if (typeof value === "string") {
+				queryParams.append(key, value);
+			}
 		});
+		router.push(`/regcolb/form-preview?${queryParams.toString()}`);
 	};
 
 	return (
@@ -711,7 +609,6 @@ function Form() {
 						name="marriage_certificate"
 						accept="image/*"
 						onChange={handleChanges}
-						required
 						className="block w-full text-sm"
 					/>
 					<p className="text-xs text-gray-500 mt-1">
