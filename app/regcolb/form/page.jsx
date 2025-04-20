@@ -6,6 +6,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Form from "../../components/Form";
 import FooterBanner from "@/app/components/FooterBanner";
+import { Suspense } from "react";
 
 export default function BirthFormPage() {
 	const [user, setUser] = useState(null);
@@ -35,7 +36,9 @@ export default function BirthFormPage() {
 						<p className="text-gray-600">Not signed in</p>
 					)}
 				</div>
-				<Form />
+				<Suspense fallback={<div>Loading form...</div>}>
+					<Form />
+				</Suspense>
 				<FooterBanner />
 				<Footer />
 			</div>
