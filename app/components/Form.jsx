@@ -1,10 +1,9 @@
-import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
-import { uploadFile } from "@/utils/uploadFile";
 import GcashModal from "./GcashModal";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { uploadFile } from "@/utils/uploadFile";
 
 function Form() {
 	//gcash modal
@@ -25,6 +24,8 @@ function Form() {
 		attendant_position: "",
 		birthdate: "",
 		birthplace: "",
+		birth_province: "",
+		birth_city: "",
 		type_of_birth: "",
 		type_of_birth_other: "",
 		multiple_birth_order: "",
@@ -287,6 +288,38 @@ function Form() {
 							name="birthplace"
 							placeholder="e.g. Butuan City Hospital"
 							value={values.birthplace}
+							onChange={handleChanges}
+							className="block w-full p-2 rounded text-sm border border-gray-300"
+						/>
+					</div>
+
+					{/* City Birth / Registration */}
+					<div>
+						<label className="text-sm font-bold text-gray-600 block mb-1">
+							City/Municipality of Birth Registration (Asa na syudad gi-anak ang
+							bata/tao nga iparehistro?):
+						</label>
+						<input
+							type="text"
+							name="birth_city"
+							placeholder="e.g. Nasipit"
+							value={values.birth_city}
+							onChange={handleChanges}
+							className="block w-full p-2 rounded text-sm border border-gray-300"
+						/>
+					</div>
+
+					{/* Province Birth / Registration */}
+					<div>
+						<label className="text-sm font-bold text-gray-600 block mb-1">
+							Province of Birth Registration (Asa na probinsya gi-anak ang
+							bata/tao nga iparehistro?):
+						</label>
+						<input
+							type="text"
+							name="birth_province"
+							placeholder="e.g. Agusan del Norte"
+							value={values.birth_province}
 							onChange={handleChanges}
 							className="block w-full p-2 rounded text-sm border border-gray-300"
 						/>

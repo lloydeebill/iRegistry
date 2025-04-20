@@ -1,5 +1,4 @@
 "use client";
-export const dynamic = "force-dynamic";
 import { useSearchParams, useRouter } from "next/navigation";
 import { generateCertificatePDF } from "@/utils/generateCertificatePDF";
 import { supabase } from "@/lib/supabaseClient";
@@ -21,6 +20,8 @@ const FormPreview = () => {
 		sex: get("sex"),
 		birthdate: get("birthdate"),
 		birthplace: get("birthplace"),
+		birth_city: get("birth_city"),
+		birth_province: get("birth_province"),
 		type_of_birth: get("type_of_birth"),
 		type_of_birth_other: get("type_of_birth_other"),
 		multiple_birth_order: get("multiple_birth_order"),

@@ -22,13 +22,13 @@ const generateCertificatePDF = async (formData = {}) => {
 		const get = (field) => formData[field] || "";
 
 		// Province and City/Municipality
-		page.drawText(get("province"), {
+		page.drawText(get("birth_province"), {
 			x: 120,
 			y: 755,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
-		page.drawText(get("city_municipality"), {
+		page.drawText(get("birth_city"), {
 			x: 120,
 			y: 740,
 			size: 12,
@@ -63,20 +63,32 @@ const generateCertificatePDF = async (formData = {}) => {
 			color: rgb(0, 0, 0),
 		});
 
+		const birthdate = get("birthdate");
+		let birth_day = "";
+		let birth_month = "";
+		let birth_year = "";
+
+		if (birthdate) {
+			const date = new Date(birthdate);
+			birth_day = date.getDate().toString().padStart(2, "0");
+			birth_month = date.toLocaleString("en-US", { month: "long" }); // e.g. "April"
+			birth_year = date.getFullYear().toString();
+		}
+
 		// Birthday
-		page.drawText(get("birth_day"), {
+		page.drawText(birth_day, {
 			x: 310,
 			y: 685,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
-		page.drawText(get("birth_month"), {
+		page.drawText(birth_month, {
 			x: 420,
 			y: 685,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
-		page.drawText(get("birth_year"), {
+		page.drawText(birth_year, {
 			x: 500,
 			y: 685,
 			size: 12,
@@ -84,14 +96,8 @@ const generateCertificatePDF = async (formData = {}) => {
 		});
 
 		// Place of Birth
-		page.drawText(get("birth_city"), {
+		page.drawText(get("birthplace"), {
 			x: 310,
-			y: 660,
-			size: 12,
-			color: rgb(0, 0, 0),
-		});
-		page.drawText(get("birth_province"), {
-			x: 430,
 			y: 660,
 			size: 12,
 			color: rgb(0, 0, 0),
@@ -104,7 +110,8 @@ const generateCertificatePDF = async (formData = {}) => {
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
-		page.drawText(get("weight"), {
+
+		page.drawText(get("birth_weight"), {
 			x: 520,
 			y: 630,
 			size: 12,
@@ -130,7 +137,7 @@ const generateCertificatePDF = async (formData = {}) => {
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
-		page.drawText(get("mother_citizenship"), {
+		page.drawText(get("mother_nationality"), {
 			x: 120,
 			y: 580,
 			size: 12,
@@ -143,13 +150,13 @@ const generateCertificatePDF = async (formData = {}) => {
 			color: rgb(0, 0, 0),
 		});
 
-		page.drawText(get("children_alive"), {
+		page.drawText(get("children_born_alive"), {
 			x: 80,
 			y: 550,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
-		page.drawText(get("children_living"), {
+		page.drawText(get("children_still_living"), {
 			x: 170,
 			y: 550,
 			size: 12,
@@ -167,6 +174,14 @@ const generateCertificatePDF = async (formData = {}) => {
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
+
+		page.drawText(get("mother_age_at_birth"), {
+			x: 600,
+			y: 550,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
 		page.drawText(get("mother_residence"), {
 			x: 170,
 			y: 520,
@@ -193,7 +208,15 @@ const generateCertificatePDF = async (formData = {}) => {
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
-		page.drawText(get("father_citizenship"), {
+
+		page.drawText(get("father_age_at_birth"), {
+			x: 600,
+			y: 460,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("father_nationality"), {
 			x: 120,
 			y: 460,
 			size: 12,
@@ -214,6 +237,67 @@ const generateCertificatePDF = async (formData = {}) => {
 		page.drawText(get("father_residence"), {
 			x: 170,
 			y: 435,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		const marriageDate = get("marriage_date");
+		let marriage_day = "";
+		let marriage_month = "";
+		let marriage_year = "";
+
+		if (marriageDate) {
+			const date = new Date(marriageDate);
+			marriage_day = date.getDate().toString().padStart(2, "0");
+			marriage_month = date.toLocaleString("en-US", { month: "long" }); // e.g. "April"
+			marriage_year = date.getFullYear().toString();
+		}
+
+		page.drawText(marriage_month, {
+			x: 90,
+			y: 400,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(marriage_day, {
+			x: 150,
+			y: 400,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(marriage_year, {
+			x: 180,
+			y: 400,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("marriage_city"), {
+			x: 300,
+			y: 400,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("marriage_province"), {
+			x: 380,
+			y: 400,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("marriage_country"), {
+			x: 490,
+			y: 400,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("attendant_name"), {
+			x: 130,
+			y: 150,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
