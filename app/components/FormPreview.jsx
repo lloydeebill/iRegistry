@@ -122,7 +122,7 @@ const FormPreview = () => {
 							<span className="font-semibold capitalize">
 								{key.replaceAll("_", " ")}:
 							</span>{" "}
-							{value || "-"}
+							{value || "N/A"}
 						</p>
 					))}
 				</div>

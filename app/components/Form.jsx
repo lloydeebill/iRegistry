@@ -1061,9 +1061,9 @@ function Form() {
 						I, hereby consent to the following:
 						<br />
 						<br />
-						- I authorize the Local Civil Registry Office of Buenavista, Agusan
-						del Norte to collect and use my personal information for the purpose
-						of applying for the certificate of live birth. <br />
+						- I authorize the Local Civil Registry Office of Nasipit, Agusan del
+						Norte to collect and use my personal information for the purpose of
+						applying for the certificate of live birth. <br />
 						- I understand that I have the right to access my personal
 						information and to request that it be corrected or deleted. <br />-
 						I certify that the information I have provided is true and accurate.

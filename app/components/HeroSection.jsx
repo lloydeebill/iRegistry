@@ -12,18 +12,15 @@ const HeroSection = () => {
 		"Request Certificate of No Marriage",
 		"Request Certificate of No Death",
 	];
-	const registerOptions = [
-		"Registration of Birth",
-		"Registration of Death",
-		"Application of Marriage License",
-	];
+	const registerOptions = ["Registration of Birth", "Registration of Death"];
 
 	return (
 		<section className="grid grid-cols-1 lg:grid-cols-12 my-4">
-			<div className="col-span-4 place-self-center place-items-center grid lg:place-items-start">
+			<div className="col-span-5 place-self-center place-items-center grid lg:place-items-start">
 				<div className="mb-4 text-center lg:text-left">
-					<h1 className="max-w-2xl mb-2 lg:text-6xl text-4xl font-extrabold ">
-						Registration or Request PSA Copies
+					<h1 className="max-w-2xl mb-2 lg:text-5xl text-4xl font-extrabold ">
+						Register or Request <br />
+						your PSA Documents
 					</h1>
 					<p className="text-base sm:text-lg lg:text-2xl">
 						Your Online Civil Registry Destination!
@@ -50,7 +47,7 @@ const HeroSection = () => {
 				</div>
 			</div>
 
-			<div className="col-span-8 place-self-center mt-4 lg:mt-0">
+			<div className="col-span-7 place-self-center ml-20 mt-4 lg:mt-0">
 				<div className="w-[150px] h-[150px] lg:w-[500px] lg:h-[500px] relative">
 					<Image
 						src="/hero.svg"

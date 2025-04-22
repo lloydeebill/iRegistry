@@ -38,6 +38,21 @@ const Navbar = () => {
 		};
 	}, []);
 
+	const [hasShadow, setHasShadow] = useState(false);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY > 0) {
+				setHasShadow(true);
+			} else {
+				setHasShadow(false);
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
+
 	const handleSignIn = async () => {
 		const { error } = await supabase.auth.signInWithOAuth({
 			provider: "google",
@@ -55,7 +70,11 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav className="fixed top-0 left-0 right-0 z-10 bg-[#F1F1F1] bg-opacity-90">
+		<nav
+			className={`fixed top-0 left-0 right-0 z-10 bg-[#F1F1F1] bg-opacity-90 transition-shadow duration-300 ${
+				hasShadow ? "shadow-lg shadow-blue-200" : "shadow-none"
+			}`}
+		>
 			<div className="max-w-8xl mx-auto px-4 lg:px-44 py-2 flex items-center justify-between">
 				<Image
 					src="/iregistry.png"

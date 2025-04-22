@@ -15,7 +15,7 @@ const CertifyAndConsent = ({ title, link }) => {
 				<p className="text-base sm:text-sm md:text-xl lg:text-2xl text-left leading-relaxed">
 					By clicking the “Proceed to Form” button, I fully understand that I am
 					voluntarily providing personal and sensitive information to the Local
-					Civil Registrar of Buenavista, Agusan del Norte which will exclusively
+					Civil Registrar of Nasipit, Agusan del Norte which will exclusively
 					use the information to process the Civil Registry document.
 					<br />
 					<br />

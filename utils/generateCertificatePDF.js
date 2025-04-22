@@ -6,7 +6,7 @@ const generateCertificatePDF = async (formData = {}) => {
 		const pdfDoc = await PDFDocument.create();
 		const page = pdfDoc.addPage([595, 842]); // A4 size
 
-		const imageUrl = "/certificate-template.png";
+		const imageUrl = "/certificate-template1.png";
 		const response = await fetch(imageUrl);
 		const imageBytes = await response.arrayBuffer();
 		const pngImage = await pdfDoc.embedPng(imageBytes);
@@ -24,13 +24,13 @@ const generateCertificatePDF = async (formData = {}) => {
 		// Province and City/Municipality
 		page.drawText(get("birth_province"), {
 			x: 120,
-			y: 755,
+			y: 775,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("birth_city"), {
 			x: 120,
-			y: 740,
+			y: 750,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -38,19 +38,19 @@ const generateCertificatePDF = async (formData = {}) => {
 		// Child Full Name
 		page.drawText(get("child_firstname"), {
 			x: 120,
-			y: 710,
+			y: 720,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("child_middlename"), {
 			x: 280,
-			y: 710,
+			y: 720,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("child_lastname"), {
 			x: 430,
-			y: 710,
+			y: 720,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -58,7 +58,7 @@ const generateCertificatePDF = async (formData = {}) => {
 		// Sex
 		page.drawText(get("sex"), {
 			x: 120,
-			y: 690,
+			y: 700,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -78,19 +78,19 @@ const generateCertificatePDF = async (formData = {}) => {
 		// Birthday
 		page.drawText(birth_day, {
 			x: 310,
-			y: 685,
+			y: 700,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(birth_month, {
 			x: 420,
-			y: 685,
+			y: 700,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(birth_year, {
 			x: 500,
-			y: 685,
+			y: 700,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -98,7 +98,7 @@ const generateCertificatePDF = async (formData = {}) => {
 		// Place of Birth
 		page.drawText(get("birthplace"), {
 			x: 310,
-			y: 660,
+			y: 670,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -106,14 +106,35 @@ const generateCertificatePDF = async (formData = {}) => {
 		// Type of Birth & Weight
 		page.drawText(get("type_of_birth"), {
 			x: 120,
-			y: 630,
+			y: 650,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("type_of_birth_other"), {
+			x: 120,
+			y: 650,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("multiple_birth_order"), {
+			x: 150,
+			y: 650,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("birth_order"), {
+			x: 420,
+			y: 640,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 
 		page.drawText(get("birth_weight"), {
 			x: 520,
-			y: 630,
+			y: 640,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -121,50 +142,50 @@ const generateCertificatePDF = async (formData = {}) => {
 		// Mother Info
 		page.drawText(get("mother_firstname"), {
 			x: 120,
-			y: 600,
+			y: 615,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("mother_middlename"), {
 			x: 290,
-			y: 600,
+			y: 615,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("mother_lastname"), {
 			x: 430,
-			y: 600,
+			y: 615,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("mother_nationality"), {
 			x: 120,
-			y: 580,
+			y: 590,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("mother_religion"), {
 			x: 430,
-			y: 580,
+			y: 590,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 
 		page.drawText(get("children_born_alive"), {
 			x: 80,
-			y: 550,
+			y: 560,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("children_still_living"), {
 			x: 170,
-			y: 550,
+			y: 560,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("children_deceased"), {
 			x: 270,
-			y: 550,
+			y: 560,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -176,15 +197,15 @@ const generateCertificatePDF = async (formData = {}) => {
 		});
 
 		page.drawText(get("mother_age_at_birth"), {
-			x: 600,
+			x: 530,
 			y: 550,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 
 		page.drawText(get("mother_residence"), {
-			x: 170,
-			y: 520,
+			x: 180,
+			y: 530,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -192,51 +213,51 @@ const generateCertificatePDF = async (formData = {}) => {
 		// Father Info
 		page.drawText(get("father_firstname"), {
 			x: 120,
-			y: 490,
+			y: 500,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("father_middlename"), {
 			x: 290,
-			y: 490,
+			y: 500,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("father_lastname"), {
 			x: 430,
-			y: 490,
+			y: 500,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 
 		page.drawText(get("father_age_at_birth"), {
-			x: 600,
-			y: 460,
+			x: 510,
+			y: 470,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 
 		page.drawText(get("father_nationality"), {
 			x: 120,
-			y: 460,
+			y: 470,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("father_religion"), {
-			x: 250,
-			y: 460,
+			x: 220,
+			y: 470,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("father_occupation"), {
 			x: 420,
-			y: 460,
+			y: 470,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("father_residence"), {
 			x: 170,
-			y: 435,
+			y: 440,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
