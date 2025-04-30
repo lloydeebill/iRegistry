@@ -19,7 +19,10 @@ const generateCertificatePDF = async (formData = {}) => {
 		});
 
 		// Utility function to safely pull values
-		const get = (field) => formData[field] || "";
+		const get = (field) => {
+			const val = formData?.[field];
+			return val === null || val === undefined ? "" : String(val);
+		};
 
 		// Province and City/Municipality
 		page.drawText(get("birth_province"), {

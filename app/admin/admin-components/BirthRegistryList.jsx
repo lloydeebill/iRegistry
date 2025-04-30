@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient"; // adjust if needed
+import { useRouter } from "next/navigation";
 
 export default function BirthRegistryList() {
 	const [birthRegistrations, setBirthRegistrations] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const router = useRouter();
 
 	useEffect(() => {
 		fetchBirthRegistrations();
@@ -56,7 +58,7 @@ export default function BirthRegistryList() {
 									</td>
 									<td className="py-3 px-4">{registration.birthdate}</td>
 									<td className="py-3 px-4 capitalize">
-										{registration.status || "Pending"}
+										{registration.status}
 									</td>
 									<td className="py-3 px-4">
 										{registration.created_at
@@ -66,7 +68,9 @@ export default function BirthRegistryList() {
 									<td className="py-3 px-4">
 										<button
 											onClick={() =>
-												alert(`View details for ID: ${registration.id}`)
+												router.push(
+													`/admin/birth-registry-view/${registration.id}`
+												)
 											}
 											className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition"
 										>

@@ -60,6 +60,7 @@ const FormPreview = () => {
 		children_still_living: get("children_still_living"),
 		children_deceased: get("children_deceased"),
 		consent: get("consent"),
+		status: "Pending",
 	};
 
 	const handleDownload = async () => {
