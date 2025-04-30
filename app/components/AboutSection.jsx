@@ -101,7 +101,7 @@ const AboutSection = () => {
 						<p className="text-base lg:text-lg text-justify hidden sm:block">
 							Ensures the security and integrity of personal data, providing a
 							secure environment for sensitive information within the Local
-							Civil Registrar Office of <Nasipit></Nasipit>.
+							Civil Registrar Office of Nasipit
 						</p>
 					</div>
 					<Image
