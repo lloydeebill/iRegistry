@@ -1,32 +1,19 @@
+// app/auth/callback/page.jsx
 "use client";
 
-import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient";
+import { Suspense } from "react";
+import CallbackContent from "./CallbackContent";
 
-export default function AuthCallback() {
-	const router = useRouter();
-	const searchParams = useSearchParams();
-
-	useEffect(() => {
-		const getSessionAndRedirect = async () => {
-			const {
-				data: { session },
-			} = await supabase.auth.getSession();
-
-			if (session) {
-				// Read the ?next= param from the URL
-				const next = searchParams.get("next") || "/";
-				router.push(next);
-			}
-		};
-
-		getSessionAndRedirect();
-	}, [router, searchParams]);
-
+export default function CallbackPage() {
 	return (
-		<div className="min-h-screen flex items-center justify-center">
-			<p className="text-blue-600 text-lg">Signing you in...</p>
-		</div>
+		<Suspense
+			fallback={
+				<div className="min-h-screen flex items-center justify-center">
+					<p className="text-blue-600 text-lg">Signing you in...</p>
+				</div>
+			}
+		>
+			<CallbackContent />
+		</Suspense>
 	);
 }
