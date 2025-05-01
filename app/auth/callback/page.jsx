@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function AuthCallback() {
 	const router = useRouter();
+	const searchParams = useSearchParams();
 
 	useEffect(() => {
 		const getSessionAndRedirect = async () => {
@@ -14,12 +15,14 @@ export default function AuthCallback() {
 			} = await supabase.auth.getSession();
 
 			if (session) {
-				router.push("/regcolb"); // change this to where you want to redirect after login
+				// Read the ?next= param from the URL
+				const next = searchParams.get("next") || "/";
+				router.push(next);
 			}
 		};
 
 		getSessionAndRedirect();
-	}, [router]);
+	}, [router, searchParams]);
 
 	return (
 		<div className="min-h-screen flex items-center justify-center">
