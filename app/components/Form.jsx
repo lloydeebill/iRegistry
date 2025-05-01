@@ -21,7 +21,6 @@ function Form() {
 		sex: "",
 		attendant_name: "",
 		attendant_address: "",
-		attendant_position: "",
 		birthdate: "",
 		birthplace: "",
 		birth_province: "",
@@ -502,21 +501,6 @@ function Form() {
 							placeholder="e.g. Dr. Jose Rizal"
 							onChange={handleChanges}
 							value={values.attendant_name}
-							className="block w-full p-2 rounded text-sm border border-gray-300"
-						/>
-					</div>
-
-					{/* Position of Attendant */}
-					<div>
-						<label className="text-sm font-bold text-gray-600 block mb-1">
-							Position of Attendant:
-						</label>
-						<input
-							type="text"
-							name="attendant_position"
-							placeholder="e.g. Midwife"
-							onChange={handleChanges}
-							value={values.attendant_position}
 							className="block w-full p-2 rounded text-sm border border-gray-300"
 						/>
 					</div>

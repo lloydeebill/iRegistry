@@ -62,9 +62,17 @@ export default function BirthRegistryList() {
 									</td>
 									<td className="py-3 px-4">
 										{registration.created_at
-											? new Date(registration.created_at).toLocaleDateString()
+											? new Date(registration.created_at).toLocaleDateString(
+													"en-US",
+													{
+														year: "numeric",
+														month: "long",
+														day: "numeric",
+													}
+											  )
 											: "N/A"}
 									</td>
+
 									<td className="py-3 px-4">
 										<button
 											onClick={() =>

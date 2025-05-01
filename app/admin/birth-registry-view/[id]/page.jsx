@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { StatusPopover } from "../../admin-components/StatusPopover";
 import { generateCertificatePDF } from "@/utils/generateCertificatePDF";
 import { Button } from "@/components/ui/button"; // Make sure this is imported
+import { OfficerEditor } from "../../admin-components/OfficerEditor";
 
 export default function ViewBirthRegistration() {
 	const { id } = useParams();
@@ -27,6 +28,21 @@ export default function ViewBirthRegistration() {
 		} else {
 			alert("Status updated to " + newStatus);
 			window.location.reload(); // optional: refresh to show updated status
+		}
+	};
+
+	const handleOfficerSave = async (updates) => {
+		const { error } = await supabase
+			.from("birth_registration")
+			.update(updates)
+			.eq("id", id);
+
+		if (!error) {
+			alert("Officer info updated successfully");
+			setFormData({ ...formData, ...updates });
+		} else {
+			console.error(error);
+			alert("Failed to update officer info");
 		}
 	};
 
@@ -146,7 +162,7 @@ export default function ViewBirthRegistration() {
 							{formData.multiple_birth_order_other}
 						</p>
 						<p>
-							<strong>Birth Weight:</strong> {formData.birth_weight}
+							<strong>Birth Weight in grams:</strong> {formData.birth_weight}
 						</p>
 					</section>
 
@@ -160,9 +176,6 @@ export default function ViewBirthRegistration() {
 						</p>
 						<p>
 							<strong>Attendant Name:</strong> {formData.attendant_name}
-						</p>
-						<p>
-							<strong>Position:</strong> {formData.attendant_position}
 						</p>
 						<p>
 							<strong>Address:</strong> {formData.attendant_address}
@@ -271,9 +284,22 @@ export default function ViewBirthRegistration() {
 						</p>
 					</section>
 
-					{/* 📎 Attachments */}
+					<section className="flex flex-col gap-2">
+						<h3 className="text-lg font-bold mb-2 text-center">Prepared By</h3>
+						<p>
+							<strong>Officer Name:</strong> {formData.officer_name || "N/A"}
+						</p>
+						<p>
+							<strong>Position:</strong> {formData.officer_position || "N/A"}
+						</p>
+						<p>
+							<strong>Date Prepared:</strong> {formData.prepared_date || "N/A"}
+						</p>
+					</section>
 
 					<div className="flex flex-col justify-center items-center gap-4 mt-8">
+						<OfficerEditor data={formData} onSave={handleOfficerSave} />
+
 						{/* Update Status */}
 						<StatusPopover id={formData.id} currentStatus={formData.status} />
 

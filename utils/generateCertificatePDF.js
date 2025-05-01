@@ -10,6 +10,14 @@ const generateCertificatePDF = async (formData = {}) => {
 		const response = await fetch(imageUrl);
 		const imageBytes = await response.arrayBuffer();
 		const pngImage = await pdfDoc.embedPng(imageBytes);
+		const formattedDate = new Date(formData.created_at).toLocaleDateString(
+			"en-US",
+			{
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+			}
+		);
 
 		page.drawImage(pngImage, {
 			x: 0,
@@ -27,7 +35,7 @@ const generateCertificatePDF = async (formData = {}) => {
 		// Province and City/Municipality
 		page.drawText(get("birth_province"), {
 			x: 120,
-			y: 775,
+			y: 770,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -176,19 +184,19 @@ const generateCertificatePDF = async (formData = {}) => {
 
 		page.drawText(get("children_born_alive"), {
 			x: 80,
-			y: 560,
+			y: 550,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("children_still_living"), {
 			x: 170,
-			y: 560,
+			y: 550,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("children_deceased"), {
 			x: 270,
-			y: 560,
+			y: 550,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
@@ -241,7 +249,7 @@ const generateCertificatePDF = async (formData = {}) => {
 		});
 
 		page.drawText(get("father_nationality"), {
-			x: 120,
+			x: 90,
 			y: 470,
 			size: 12,
 			color: rgb(0, 0, 0),
@@ -253,7 +261,7 @@ const generateCertificatePDF = async (formData = {}) => {
 			color: rgb(0, 0, 0),
 		});
 		page.drawText(get("father_occupation"), {
-			x: 420,
+			x: 390,
 			y: 470,
 			size: 12,
 			color: rgb(0, 0, 0),
@@ -319,9 +327,79 @@ const generateCertificatePDF = async (formData = {}) => {
 			color: rgb(0, 0, 0),
 		});
 
+		page.drawText(get("attendant"), {
+			x: 130,
+			y: 295,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
 		page.drawText(get("attendant_name"), {
 			x: 130,
-			y: 150,
+			y: 310,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("attendant_position"), {
+			x: 130,
+			y: 295,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("attendant_address"), {
+			x: 400,
+			y: 325,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("fullname"), {
+			x: 90,
+			y: 235,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("relationship"), {
+			x: 130,
+			y: 220,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("address"), {
+			x: 60,
+			y: 205,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(formattedDate, {
+			x: 80,
+			y: 190,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("officer_name"), {
+			x: 400,
+			y: 235,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("officer_position"), {
+			x: 400,
+			y: 220,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
+
+		page.drawText(get("prepared_date"), {
+			x: 400,
+			y: 200,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
