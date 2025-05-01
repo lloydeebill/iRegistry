@@ -6,6 +6,7 @@ import NavLink from "./NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import MenuOverlay from "./MenuOverlay";
 import Image from "next/image";
+import { Menu } from "@headlessui/react";
 
 const navLinks = [
 	{ title: "Home", path: "/" },
@@ -99,12 +100,29 @@ const Navbar = () => {
 							Sign In
 						</button>
 					) : (
-						<button
-							onClick={handleSignOut}
-							className="text-red-700 hover:text-red-400 transition"
-						>
-							Sign Out
-						</button>
+						<Menu as="div" className="relative inline-block text-left">
+							<div>
+								<Menu.Button className="inline-flex justify-center items-center gap-2 text-blue-700 hover:text-blue-400 transition">
+									<span className="font-medium">
+										{user.user_metadata?.name || user.email}
+									</span>
+								</Menu.Button>
+							</div>
+
+							<Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none z-20">
+								<div className="px-4 py-2 text-sm text-gray-600">
+									{user.email}
+								</div>
+								<div className="px-4 py-2">
+									<button
+										onClick={handleSignOut}
+										className="text-red-600 hover:underline text-sm"
+									>
+										Sign Out
+									</button>
+								</div>
+							</Menu.Items>
+						</Menu>
 					)}
 				</div>
 

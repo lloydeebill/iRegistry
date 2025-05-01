@@ -9,7 +9,9 @@ export default function CallbackPage() {
 		<Suspense
 			fallback={
 				<div className="min-h-screen flex items-center justify-center">
-					<p className="text-blue-600 text-lg">Signing you in...</p>
+					<p className="text-blue-600 text-lg lg:text-4xl ">
+						Signing you in...
+					</p>
 				</div>
 			}
 		>

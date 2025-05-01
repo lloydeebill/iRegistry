@@ -46,21 +46,7 @@ const ReqstColb = () => {
 
 			<div className="container mx-auto px-12 py-0">
 				{/* Auth message */}
-				<div className="mt-24 text-xl">
-					<div className="mt-7 text-blue-500 text-center text-sm lg:text-start lg:text-xl mb-4">
-						{user ? (
-							<p className="text-black">
-								User:{" "}
-								<span className="font-medium text-blue-600">{user.email}</span>
-							</p>
-						) : (
-							<p className="text-black">
-								User:{" "}
-								<span className="font-medium text-blue-600">Not signed in</span>
-							</p>
-						)}
-					</div>
-				</div>
+				<div className="mt-24 text-xl"></div>
 
 				<div className="col-span-4 place-self-center place-items-center grid lg:place-items-start">
 					<CertifyAndConsent title={title} link={link} />

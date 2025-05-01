@@ -12,7 +12,7 @@ const MenuOverlay = ({ links, user, handleSignIn, handleSignOut }) => {
 				</li>
 			))}
 
-			{/* Auth Buttons for Mobile */}
+			{/* Auth Section for Mobile */}
 			{!user ? (
 				<li>
 					<button
@@ -23,14 +23,20 @@ const MenuOverlay = ({ links, user, handleSignIn, handleSignOut }) => {
 					</button>
 				</li>
 			) : (
-				<li>
-					<button
-						onClick={handleSignOut}
-						className="text-red-700 hover:text-red-400 transition"
-					>
-						Sign Out
-					</button>
-				</li>
+				<>
+					<li className="text-sm ">
+						Signed in as:{" "}
+						<span className="font-semibold text-blue-400">{user.email}</span>
+					</li>
+					<li>
+						<button
+							onClick={handleSignOut}
+							className="text-red-700 hover:text-red-400 transition"
+						>
+							Sign Out
+						</button>
+					</li>
+				</>
 			)}
 		</ul>
 	);
