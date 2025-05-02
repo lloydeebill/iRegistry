@@ -32,7 +32,6 @@ const FormPreview = () => {
 		attendant: get("attendant"),
 		attendant_name: get("attendant_name"),
 		attendant_address: get("attendant_address"),
-		attendant_position: get("attendant_position"),
 		parents_married: get("parents_married"),
 		marriage_date: get("marriage_date"),
 		marriage_city: get("marriage_city"),
