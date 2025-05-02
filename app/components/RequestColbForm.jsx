@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RequestColbForm() {
+	const router = useRouter();
 	const [values, setValues] = useState({
 		informant_name: "",
 		relationship: "",
@@ -26,8 +28,15 @@ export default function RequestColbForm() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("Submitted request:", values);
-		// TODO: Insert into Supabase or navigate to preview
+
+		const queryParams = new URLSearchParams();
+		Object.entries(values).forEach(([key, value]) => {
+			if (typeof value === "string") {
+				queryParams.append(key, value);
+			}
+		});
+
+		router.push(`/reqstcolb/form-preview?${queryParams.toString()}`);
 	};
 
 	return (
@@ -99,34 +108,34 @@ export default function RequestColbForm() {
 				</div>
 
 				<div>
-						<label className="text-sm font-bold text-gray-600 block mb-1">
-							Sex:
+					<label className="text-sm font-bold text-gray-600 block mb-1">
+						Sex:
+					</label>
+					<div className="flex items-center space-x-4">
+						<label className="flex items-center space-x-1">
+							<input
+								type="radio"
+								name="child_sex"
+								value="Male"
+								checked={values.child_sex === "Male"}
+								onChange={handleChange}
+								className="w-4 h-4"
+							/>
+							<span>Male</span>
 						</label>
-						<div className="flex items-center space-x-4">
-							<label className="flex items-center space-x-1">
-								<input
-									type="radio"
-									name="child_sex"
-									value="Male"
-									checked={values.sex === "Male"}
-									onChange={handleChange}
-									className="w-4 h-4"
-								/>
-								<span>Male</span>
-							</label>
-							<label className="flex items-center space-x-1">
-								<input
-									type="radio"
-									name="child_sex"
-									value="Female"
-									checked={values.sex === "Female"}
-									onChange={handleChange}
-									className="w-4 h-4"
-								/>
-								<span>Female</span>
-							</label>
-						</div>
+						<label className="flex items-center space-x-1">
+							<input
+								type="radio"
+								name="child_sex"
+								value="Female"
+								checked={values.child_sex === "Female"}
+								onChange={handleChange}
+								className="w-4 h-4"
+							/>
+							<span>Female</span>
+						</label>
 					</div>
+				</div>
 
 				{/* Child's Birthdate */}
 				<div>
@@ -137,7 +146,7 @@ export default function RequestColbForm() {
 						type="date"
 						name="child_birthdate"
 						onChange={handleChange}
-						value={values.birthdate}
+						value={values.child_birthdate}
 						className="block w-full p-2 rounded text-sm border border-gray-300"
 					/>
 				</div>
