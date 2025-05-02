@@ -10,7 +10,7 @@ import { supabase } from "@/lib/supabaseClient";
 
 const ReqstColb = () => {
 	const title = "Request Certificate of Live Birth";
-	const link = "https://forms.gle/kwX8jmdxijXNcv4v5";
+	const link = "/reqstcolb/form";
 
 	const [user, setUser] = useState(null);
 

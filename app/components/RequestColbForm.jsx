@@ -3,29 +3,31 @@
 import { useState } from "react";
 
 export default function RequestColbForm() {
-	const [formData, setFormData] = useState({
-		const [values, setValues] = useState({
-      informant_name: "",
-      relationship: "",
-      child_firstname: "",
-      child_middlename: "",
-      child_lastname: "",
-      birthdate: "",
-      father_fullname: "",
-      mother_fullname: "",
-    });
-    
+	const [values, setValues] = useState({
+		informant_name: "",
+		relationship: "",
+		child_firstname: "",
+		child_middlename: "",
+		child_lastname: "",
+		child_sex: "",
+		child_birthdate: "",
+		father_firstname: "",
+		father_middlename: "",
+		father_lastname: "",
+		mother_firstname: "",
+		mother_middlename: "",
+		mother_lastname: "",
 	});
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setFormData((prev) => ({ ...prev, [name]: value }));
+		setValues((prev) => ({ ...prev, [name]: value }));
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("Submitted request:", formData);
-		// TODO: send to Supabase or route to preview
+		console.log("Submitted request:", values);
+		// TODO: Insert into Supabase or navigate to preview
 	};
 
 	return (
@@ -66,53 +68,74 @@ export default function RequestColbForm() {
 
 				<hr className="border-t-2 border-gray-300 my-4" />
 
-				{/* Child's Name */}
 				<h2 className="text-lg font-bold text-blue-600">Child’s Information</h2>
-				<div>
-					<label className="text-sm font-bold text-gray-600 block mb-1">
-						First Name:
-					</label>
+
+				{/* Child's Full Name */}
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<input
 						type="text"
 						name="child_firstname"
+						placeholder="First Name"
 						onChange={handleChange}
 						value={values.child_firstname}
 						className="block w-full p-2 rounded text-sm border border-gray-300"
 					/>
-				</div>
-				<div>
-					<label className="text-sm font-bold text-gray-600 block mb-1">
-						Middle Name:
-					</label>
 					<input
 						type="text"
 						name="child_middlename"
+						placeholder="Middle Name"
 						onChange={handleChange}
 						value={values.child_middlename}
 						className="block w-full p-2 rounded text-sm border border-gray-300"
 					/>
-				</div>
-				<div>
-					<label className="text-sm font-bold text-gray-600 block mb-1">
-						Last Name:
-					</label>
 					<input
 						type="text"
 						name="child_lastname"
+						placeholder="Last Name"
 						onChange={handleChange}
 						value={values.child_lastname}
 						className="block w-full p-2 rounded text-sm border border-gray-300"
 					/>
 				</div>
 
-				{/* Child's Birthday */}
+				<div>
+						<label className="text-sm font-bold text-gray-600 block mb-1">
+							Sex:
+						</label>
+						<div className="flex items-center space-x-4">
+							<label className="flex items-center space-x-1">
+								<input
+									type="radio"
+									name="child_sex"
+									value="Male"
+									checked={values.sex === "Male"}
+									onChange={handleChange}
+									className="w-4 h-4"
+								/>
+								<span>Male</span>
+							</label>
+							<label className="flex items-center space-x-1">
+								<input
+									type="radio"
+									name="child_sex"
+									value="Female"
+									checked={values.sex === "Female"}
+									onChange={handleChange}
+									className="w-4 h-4"
+								/>
+								<span>Female</span>
+							</label>
+						</div>
+					</div>
+
+				{/* Child's Birthdate */}
 				<div>
 					<label className="text-sm font-bold text-gray-600 block mb-1">
 						Date of Birth:
 					</label>
 					<input
 						type="date"
-						name="birthdate"
+						name="child_birthdate"
 						onChange={handleChange}
 						value={values.birthdate}
 						className="block w-full p-2 rounded text-sm border border-gray-300"
@@ -121,33 +144,63 @@ export default function RequestColbForm() {
 
 				<hr className="border-t-2 border-gray-300 my-4" />
 
-				{/* Father's Name */}
 				<h2 className="text-lg font-bold text-blue-600">Father’s Name</h2>
-				<div>
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<input
 						type="text"
-						name="father_fullname"
-						placeholder="Full Name"
+						name="father_firstname"
+						placeholder="First Name"
 						onChange={handleChange}
-						value={values.father_fullname}
+						value={values.father_firstname}
+						className="block w-full p-2 rounded text-sm border border-gray-300"
+					/>
+					<input
+						type="text"
+						name="father_middlename"
+						placeholder="Middle Name"
+						onChange={handleChange}
+						value={values.father_middlename}
+						className="block w-full p-2 rounded text-sm border border-gray-300"
+					/>
+					<input
+						type="text"
+						name="father_lastname"
+						placeholder="Last Name"
+						onChange={handleChange}
+						value={values.father_lastname}
 						className="block w-full p-2 rounded text-sm border border-gray-300"
 					/>
 				</div>
 
-				{/* Mother's Name */}
-				<h2 className="text-lg font-bold text-blue-600 mt-4">Mother’s Name</h2>
-				<div>
+				<h2 className="text-lg font-bold text-blue-600 mt-6">Mother’s Name</h2>
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<input
 						type="text"
-						name="mother_fullname"
-						placeholder="Full Name"
+						name="mother_firstname"
+						placeholder="First Name"
 						onChange={handleChange}
-						value={values.mother_fullname}
+						value={values.mother_firstname}
+						className="block w-full p-2 rounded text-sm border border-gray-300"
+					/>
+					<input
+						type="text"
+						name="mother_middlename"
+						placeholder="Middle Name"
+						onChange={handleChange}
+						value={values.mother_middlename}
+						className="block w-full p-2 rounded text-sm border border-gray-300"
+					/>
+					<input
+						type="text"
+						name="mother_lastname"
+						placeholder="Last Name"
+						onChange={handleChange}
+						value={values.mother_lastname}
 						className="block w-full p-2 rounded text-sm border border-gray-300"
 					/>
 				</div>
 
-				{/* Submit Button */}
+				{/* Submit */}
 				<div className="text-center mt-6">
 					<button
 						type="submit"
