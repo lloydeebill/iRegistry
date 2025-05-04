@@ -56,7 +56,18 @@ export default function BirthRegistryList() {
 										{registration.child_middlename}{" "}
 										{registration.child_lastname}
 									</td>
-									<td className="py-3 px-4">{registration.birthdate}</td>
+									<td className="py-3 px-4">
+										{registration.birthdate
+											? new Date(registration.birthdate).toLocaleDateString(
+													"en-US",
+													{
+														year: "numeric",
+														month: "long",
+														day: "numeric",
+													}
+											  )
+											: "N/A"}
+									</td>
 									<td className="py-3 px-4 capitalize">
 										{registration.status}
 									</td>

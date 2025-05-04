@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Overview from "../admin-components/Overview"; // 🧠 import Overview
 import BirthRegistryList from "../admin-components/BirthRegistryList"; // 🧠 import BirthRegistryList
+import BirthRequestList from "../admin-components/BirthRequestsList";
 
 export default function AdminDashboardPage() {
 	const [activePage, setActivePage] = useState("overview");
@@ -27,6 +28,13 @@ export default function AdminDashboardPage() {
 					>
 						<span>📋</span>
 						<span>Birth Registry List</span>
+					</button>
+					<button
+						onClick={() => setActivePage("request")}
+						className="flex items-center space-x-2 hover:underline text-left"
+					>
+						<span>📋</span>
+						<span>Birth Request List</span>
 					</button>
 				</nav>
 			</aside>
@@ -59,6 +67,7 @@ export default function AdminDashboardPage() {
 				<main className="p-8">
 					{activePage === "overview" && <Overview />}
 					{activePage === "registry" && <BirthRegistryList />}
+					{activePage === "request" && <BirthRequestList />}
 				</main>
 			</div>
 		</div>

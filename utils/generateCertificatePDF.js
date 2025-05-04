@@ -130,8 +130,8 @@ const generateCertificatePDF = async (formData = {}) => {
 		});
 
 		page.drawText(get("multiple_birth_order"), {
-			x: 150,
-			y: 650,
+			x: 230,
+			y: 640,
 			size: 12,
 			color: rgb(0, 0, 0),
 		});
