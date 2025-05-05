@@ -1,39 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import Overview from "../admin-components/Overview"; // 🧠 import Overview
-import BirthRegistryList from "../admin-components/BirthRegistryList"; // 🧠 import BirthRegistryList
+import Overview from "../admin-components/Overview";
+import BirthRegistryList from "../admin-components/BirthRegistryList";
 import BirthRequestList from "../admin-components/BirthRequestsList";
+import Image from "next/image";
 
 export default function AdminDashboardPage() {
 	const [activePage, setActivePage] = useState("overview");
 
 	return (
-		<div className="min-h-screen flex bg-gray-100">
+		<div className="min-h-screen flex bg-neutral-50 font-sans">
 			{/* Sidebar */}
-			<aside className="w-64 bg-[#3790d7] text-white flex flex-col p-6">
-				<h1 className="text-3xl font-bold mb-10">Dashboard</h1>
-				<nav className="flex flex-col gap-6">
+			<aside className="w-64 bg-white flex flex-col items-center  z-0">
+				{/* Logo Instead of "Dashboard" */}
+				<Image
+					src="/iregistry.png"
+					alt="iRegistry Logo"
+					width={300}
+					height={60}
+					className="object-contain mb-10"
+				/>
+
+				<nav className="flex flex-col w-full text-lg font-semibold">
 					<button
 						onClick={() => setActivePage("overview")}
-						className="flex items-center space-x-2 hover:underline text-left"
+						className={`flex items-center space-x-2 hover:bg-blue-50 text-left p-6 ${
+							activePage === "overview" ? "font-semibold bg-blue-50" : ""
+						}`}
 					>
-						<span>🏠</span>
 						<span>Home</span>
 					</button>
 
 					<button
 						onClick={() => setActivePage("registry")}
-						className="flex items-center space-x-2 hover:underline text-left"
+						className={`flex items-center space-x-2 hover:bg-blue-50 text-left p-6 ${
+							activePage === "registry" ? "font-semibold bg-blue-50" : ""
+						}`}
 					>
-						<span>📋</span>
-						<span>Birth Registry List</span>
+						<span>Live Birth Database</span>
 					</button>
+
 					<button
 						onClick={() => setActivePage("request")}
-						className="flex items-center space-x-2 hover:underline text-left"
+						className={`flex items-center space-x-2 hover:bg-blue-50 text-left p-6 ${
+							activePage === "request" ? "font-semibold bg-blue-50" : ""
+						}`}
 					>
-						<span>📋</span>
 						<span>Birth Request List</span>
 					</button>
 				</nav>
@@ -42,28 +55,21 @@ export default function AdminDashboardPage() {
 			{/* Main Content */}
 			<div className="flex-1 flex flex-col">
 				{/* Topbar */}
-				<header className="flex items-center justify-between p-6 bg-white shadow-md">
-					<div className="flex items-center bg-gray-100 p-2 rounded-lg w-1/2">
-						<span className="mr-2">🔍</span>
-						<input
-							type="text"
-							placeholder="What are you looking?"
-							className="bg-transparent focus:outline-none w-full"
-						/>
+				<header className="flex items-center justify-between p-6 bg-white shadow-lg shadow-blue-200 px-9">
+					<div className="">
+						<h1 className="text-3xl font-bold x">Dashboard</h1>
 					</div>
-
 					<div className="flex items-center space-x-4">
 						<span>🔔</span>
 						<img
-							src="https://i.pravatar.cc/40"
+							src="/officer-pic.png"
 							alt="Profile"
 							className="w-10 h-10 rounded-full"
 						/>
-						<div className="font-semibold">Loidee Bee</div>
+						<div className="font-semibold">Registry Officer 1 </div>
 					</div>
 				</header>
 
-				{/* Dynamic Main Content */}
 				<main className="p-8">
 					{activePage === "overview" && <Overview />}
 					{activePage === "registry" && <BirthRegistryList />}

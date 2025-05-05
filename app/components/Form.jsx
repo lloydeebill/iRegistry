@@ -419,37 +419,53 @@ function Form() {
 						</div>
 					</div>
 
-					{/* If multiple birth, child was */}
 					<div>
 						<label className="text-sm font-bold text-gray-600 block mb-1">
-							If multiple birth, child was:
+							Weight at Birth (optional):
 						</label>
-						<div className="space-y-1">
-							{["First", "Second", "Third", "Other"].map((label) => (
-								<label key={label} className="flex items-center space-x-2">
-									<input
-										type="radio"
-										name="multiple_birth_order"
-										value={label}
-										onChange={handleChanges}
-										checked={values.multiple_birth_order === label}
-										className="w-4 h-4"
-									/>
-									<span>{label}</span>
-								</label>
-							))}
-							{values.multiple_birth_order === "Other" && (
-								<input
-									type="text"
-									name="multiple_birth_order_other"
-									placeholder="e.g. Fourth"
-									onChange={handleChanges}
-									value={values.multiple_birth_order_other}
-									className="block w-full p-2 rounded text-sm border border-gray-300"
-								/>
-							)}
-						</div>
+						<input
+							type="text"
+							name="birth_weight"
+							placeholder="e.g. 7 pounds or 2,000 grams"
+							onChange={handleChanges}
+							value={values.birth_weight}
+							className="block w-full p-2 rounded text-sm border border-gray-300"
+						/>
 					</div>
+
+					{/* If multiple birth, child was */}
+					{values.type_of_birth !== "Single" && (
+						<div>
+							<label className="text-sm font-bold text-gray-600 block mb-1">
+								If multiple birth, child was:
+							</label>
+							<div className="space-y-1">
+								{["First", "Second", "Third", "Other"].map((label) => (
+									<label key={label} className="flex items-center space-x-2">
+										<input
+											type="radio"
+											name="multiple_birth_order"
+											value={label}
+											onChange={handleChanges}
+											checked={values.multiple_birth_order === label}
+											className="w-4 h-4"
+										/>
+										<span>{label}</span>
+									</label>
+								))}
+								{values.multiple_birth_order === "Other" && (
+									<input
+										type="text"
+										name="multiple_birth_order_other"
+										placeholder="e.g. Fourth"
+										onChange={handleChanges}
+										value={values.multiple_birth_order_other}
+										className="block w-full p-2 rounded text-sm border border-gray-300"
+									/>
+								)}
+							</div>
+						</div>
+					)}
 
 					{/* Birth Order */}
 					<div>
@@ -483,20 +499,6 @@ function Form() {
 								/>
 							)}
 						</div>
-					</div>
-
-					<div>
-						<label className="text-sm font-bold text-gray-600 block mb-1">
-							Weight at Birth (optional):
-						</label>
-						<input
-							type="text"
-							name="birth_weight"
-							placeholder="e.g. 7 pounds or 2,000 grams"
-							onChange={handleChanges}
-							value={values.birth_weight}
-							className="block w-full p-2 rounded text-sm border border-gray-300"
-						/>
 					</div>
 
 					{/* Attendant */}

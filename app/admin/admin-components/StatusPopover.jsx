@@ -30,18 +30,12 @@ export function StatusPopover({
 	const handleSelect = async (value) => {
 		if (!id) return alert("❌ No ID provided");
 
-		console.log("🔁 Attempting status update...");
-		console.log("📄 Target Table:", table);
-		console.log("🆔 Target ID:", id);
-		console.log("📌 New Status:", value);
-
 		const { error } = await supabase
 			.from(table)
 			.update({ status: value })
 			.eq("id", id);
 
 		if (error) {
-			console.error("❌ Supabase update failed:", error);
 			alert("Error updating status: " + error.message);
 			return;
 		}
@@ -50,11 +44,8 @@ export function StatusPopover({
 		onChange && onChange(value);
 		setOpen(false);
 
-		console.log("✅ Supabase status update successful!");
-
 		// 📧 Send confirmation email if status is Verified
 		if (value.toLowerCase() === "verified" && email && childName) {
-			console.log("📬 Sending verification email to:", email);
 			try {
 				const response = await fetch("/api/send-email", {
 					method: "POST",
@@ -68,17 +59,15 @@ export function StatusPopover({
 
 				const result = await response.json();
 				if (!response.ok) throw new Error(result?.error || "Unknown error");
-				alert("📧 Email sent!");
-				console.log("✅ Email sent successfully!");
+				alert("📧 Verification email sent to the recipient!");
 			} catch (err) {
-				console.error("❌ Email sending failed:", err);
 				alert("Email failed: " + err.message);
 			}
 		}
 	};
 
 	return (
-		<div className="mt-10">
+		<div className="">
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
 					<Button variant="outline" className="capitalize">

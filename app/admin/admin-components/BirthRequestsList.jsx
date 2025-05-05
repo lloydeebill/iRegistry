@@ -28,35 +28,38 @@ export default function BirthRequestList() {
 	}, []);
 
 	if (loading)
-		return <p className="p-4 text-center">Loading birth requests...</p>;
+		return (
+			<div className="flex justify-center lg:mt-72 min-h-screen">
+				<h1 className="text-blue-700 text-2xl">Loading...</h1>
+			</div>
+		);
 
 	return (
-		<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+		<>
 			<h1 className="text-2xl font-bold text-center mb-6 text-blue-700">
-				Birth Requests List
+				Certificate of Live Birth Requests
 			</h1>
-
-			<div className="overflow-x-auto bg-white rounded-md shadow">
-				<table className="min-w-full table-auto">
-					<thead className="bg-gray-100 text-sm text-left">
+			<div className="overflow-x-auto">
+				<table className="min-w-full bg-white rounded-lg overflow-hidden shadow-md">
+					<thead className="bg-[#3790d7] text-white">
 						<tr>
-							<th className="px-4 py-3 font-semibold">Informant Name</th>
-							<th className="px-4 py-3 font-semibold">Child Name</th>
-							<th className="px-4 py-3 font-semibold">Birthdate</th>
-							<th className="px-4 py-3 font-semibold">Submitted</th>
+							<th className="py-3 px-4 text-left">Informant</th>
+							<th className="py-3 px-4 text-left">Child Full Name</th>
+							<th className="py-3 px-4 text-left">Birthdate</th>
+							<th className="py-3 px-4 text-left">Submitted</th>
 							<th className="py-3 px-4 text-left">Status</th>
 							<th className="py-3 px-4 text-left">Action</th>
 						</tr>
 					</thead>
-					<tbody className="text-sm divide-y divide-gray-200">
+					<tbody>
 						{requests.map((request) => (
-							<tr key={request.id}>
-								<td className="px-4 py-2">{request.informant_name}</td>
-								<td className="px-4 py-2">
+							<tr key={request.id} className="border-t hover:bg-gray-100">
+								<td className="py-3 px-4">{request.informant_name}</td>
+								<td className="py-3 px-4">
 									{request.child_firstname} {request.child_middlename}{" "}
 									{request.child_lastname}
 								</td>
-								<td className="px-4 py-2">
+								<td className="py-3 px-4">
 									{request.child_birthdate
 										? new Date(request.child_birthdate).toLocaleDateString(
 												"en-US",
@@ -64,12 +67,11 @@ export default function BirthRequestList() {
 													year: "numeric",
 													month: "long",
 													day: "numeric",
-												}
-										  )
+												},
+											)
 										: "N/A"}
 								</td>
-
-								<td className="px-4 py-2">
+								<td className="py-3 px-4">
 									{new Date(request.created_at).toLocaleDateString("en-US", {
 										year: "numeric",
 										month: "long",
@@ -91,7 +93,7 @@ export default function BirthRequestList() {
 						))}
 						{requests.length === 0 && (
 							<tr>
-								<td colSpan="4" className="text-center py-4 text-gray-500">
+								<td colSpan="6" className="text-center py-4 text-gray-500">
 									No birth requests found.
 								</td>
 							</tr>
@@ -99,6 +101,6 @@ export default function BirthRequestList() {
 					</tbody>
 				</table>
 			</div>
-		</div>
+		</>
 	);
 }

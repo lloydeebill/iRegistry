@@ -31,7 +31,7 @@ const Navbar = () => {
 		const { data: listener } = supabase.auth.onAuthStateChange(
 			(_event, session) => {
 				setUser(session?.user || null);
-			}
+			},
 		);
 
 		return () => {
@@ -102,7 +102,7 @@ const Navbar = () => {
 					) : (
 						<Menu as="div" className="relative inline-block text-left">
 							<div>
-								<Menu.Button className="inline-flex justify-center items-center gap-2 text-blue-700 hover:text-blue-400 transition">
+								<Menu.Button className="inline-flex justify-center items-center gap-2 px-2 text-blue-700 hover:text-blue-400 transition">
 									<span className="font-medium">
 										{user.user_metadata?.name || user.email}
 									</span>
@@ -110,7 +110,7 @@ const Navbar = () => {
 							</div>
 
 							<Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none z-20">
-								<div className="px-4 py-2 text-sm text-gray-600">
+								<div className="px-4 py-2 text-xs text-gray-600">
 									{user.email}
 								</div>
 								<div className="px-4 py-2">

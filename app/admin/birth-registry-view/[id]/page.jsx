@@ -7,6 +7,7 @@ import { StatusPopover } from "../../admin-components/StatusPopover";
 import { generateCertificatePDF } from "@/utils/generateCertificatePDF";
 import { Button } from "@/components/ui/button"; // Make sure this is imported
 import { OfficerEditor } from "../../admin-components/OfficerEditor";
+import DashboardShell from "../../admin-components/DashboardShell"; // ✅ import your layout
 
 export default function ViewBirthRegistration() {
 	const { id } = useParams();
@@ -78,256 +79,397 @@ export default function ViewBirthRegistration() {
 		fetchData();
 	}, [id]);
 
-	if (loading) return <p className="p-4">Loading...</p>;
+	if (loading)
+		return (
+			<DashboardShell>
+				<div className="flex justify-center min-h-screen lg:mt-72">
+					<h1 className="text-blue-700 text-2xl">Loading...</h1>
+				</div>{" "}
+			</DashboardShell>
+		);
 	if (!formData) return <p className="p-4 text-red-600">No data found.</p>;
 
 	return (
-		<div className="min-h-screen bg-gray-100 py-10 px-4">
-			<div className="max-w-3xl mx-auto bg-white p-8 shadow-lg rounded-md">
-				<h1 className="text-2xl font-bold mb-6 text-center">
-					View Birth Registration
-				</h1>
-				<div className="space-y-6 text-sm px-10">
-					{/* 👤 Registrant Info */}
-					<section className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold mb-2 text-center">
-							Registrant Info
-						</h3>
-						<p>
-							<strong>Full Name:</strong> {formData.fullname}
-						</p>
-						<p>
-							<strong>Relationship:</strong> {formData.relationship}
-						</p>
-						<p>
-							<strong>Address:</strong> {formData.address}
-						</p>
-						<p>
-							<strong>Contact:</strong> {formData.contact}
-						</p>
-					</section>
-
-					{/* 👶 Child Info */}
-					<section className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold mb-2 text-center">Child Info</h3>
-						<p>
-							<strong>First Name:</strong> {formData.child_firstname}
-						</p>
-						<p>
-							<strong>Middle Name:</strong> {formData.child_middlename}
-						</p>
-						<p>
-							<strong>Last Name:</strong> {formData.child_lastname}
-						</p>
-						<p>
-							<strong>Sex:</strong> {formData.sex}
-						</p>
-						<p>
-							<strong>Birthdate:</strong> {formData.birthdate}
-						</p>
-						<p>
-							<strong>Birthplace:</strong> {formData.birthplace}
-						</p>
-						<p>
-							<strong>Birth City:</strong> {formData.birth_city}
-						</p>
-						<p>
-							<strong>Birth Province:</strong> {formData.birth_province}
-						</p>
-					</section>
-
-					{/* 📅 Birth Details */}
-					<section className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold mb-2 text-center">
-							Birth Details
-						</h3>
-						<p>
-							<strong>Type of Birth:</strong> {formData.type_of_birth}
-						</p>
-						<p>
-							<strong>Other Type:</strong> {formData.type_of_birth_other}
-						</p>
-						<p>
-							<strong>Birth Order:</strong> {formData.birth_order}
-						</p>
-						<p>
-							<strong>Other Birth Order:</strong> {formData.birth_order_other}
-						</p>
-						<p>
-							<strong>Multiple Birth Order:</strong>{" "}
-							{formData.multiple_birth_order}
-						</p>
-						<p>
-							<strong>Other Multiple Order:</strong>{" "}
-							{formData.multiple_birth_order_other}
-						</p>
-						<p>
-							<strong>Birth Weight in grams:</strong> {formData.birth_weight}
-						</p>
-					</section>
-
-					{/* 👩‍⚕️ Attendant Info */}
-					<section className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold mb-2 text-center">
-							Birth Attendant
-						</h3>
-						<p>
-							<strong>Attendant:</strong> {formData.attendant}
-						</p>
-						<p>
-							<strong>Attendant Name:</strong> {formData.attendant_name}
-						</p>
-						<p>
-							<strong>Address:</strong> {formData.attendant_address}
-						</p>
-					</section>
-
-					{/* 👪 Parents Info */}
-					<section className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold mb-2 text-center">Father Info</h3>
-						<p>
-							<strong>First Name:</strong> {formData.father_firstname}
-						</p>
-						<p>
-							<strong>Middle Name:</strong> {formData.father_middlename}
-						</p>
-						<p>
-							<strong>Last Name:</strong> {formData.father_lastname}
-						</p>
-						<p>
-							<strong>Nationality:</strong> {formData.father_nationality}
-						</p>
-						<p>
-							<strong>Religion:</strong> {formData.father_religion}
-						</p>
-						<p>
-							<strong>Occupation:</strong> {formData.father_occupation}
-						</p>
-						<p>
-							<strong>Age at Birth:</strong> {formData.father_age_at_birth}
-						</p>
-						<p>
-							<strong>Date of Birth:</strong> {formData.father_dob}
-						</p>
-						<p>
-							<strong>Residence:</strong> {formData.father_residence}
-						</p>
-					</section>
-
-					<section className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold mb-2 text-center">Mother Info</h3>
-						<p>
-							<strong>First Name:</strong> {formData.mother_firstname}
-						</p>
-						<p>
-							<strong>Middle Name:</strong> {formData.mother_middlename}
-						</p>
-						<p>
-							<strong>Last Name:</strong> {formData.mother_lastname}
-						</p>
-						<p>
-							<strong>Nationality:</strong> {formData.mother_nationality}
-						</p>
-						<p>
-							<strong>Religion:</strong> {formData.mother_religion}
-						</p>
-						<p>
-							<strong>Occupation:</strong> {formData.mother_occupation}
-						</p>
-						<p>
-							<strong>Age at Birth:</strong> {formData.mother_age_at_birth}
-						</p>
-						<p>
-							<strong>Date of Birth:</strong> {formData.mother_dob}
-						</p>
-						<p>
-							<strong>Residence:</strong> {formData.mother_residence}
-						</p>
-					</section>
-
-					{/* 💍 Marriage Info */}
-					<section className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold mb-2 text-center">
-							Marriage Info
-						</h3>
-						<p>
-							<strong>Parents Married:</strong> {formData.parents_married}
-						</p>
-						<p>
-							<strong>Marriage Date:</strong> {formData.marriage_date}
-						</p>
-						<p>
-							<strong>Marriage City:</strong> {formData.marriage_city}
-						</p>
-						<p>
-							<strong>Marriage Province:</strong> {formData.marriage_province}
-						</p>
-						<p>
-							<strong>Marriage Country:</strong> {formData.marriage_country}
-						</p>
-					</section>
-
-					{/* 🧒 Siblings */}
-					<section className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold mb-2 text-center">
-							Siblings Summary
-						</h3>
-						<p>
-							<strong>Children Born Alive:</strong>{" "}
-							{formData.children_born_alive}
-						</p>
-						<p>
-							<strong>Still Living:</strong> {formData.children_still_living}
-						</p>
-						<p>
-							<strong>Deceased:</strong> {formData.children_deceased}
-						</p>
-					</section>
-
-					<section className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold mb-2 text-center">Prepared By</h3>
-						<p>
-							<strong>Officer Name:</strong> {formData.officer_name || "N/A"}
-						</p>
-						<p>
-							<strong>Position:</strong> {formData.officer_position || "N/A"}
-						</p>
-						<p>
-							<strong>Date Prepared:</strong> {formData.prepared_date || "N/A"}
-						</p>
-					</section>
-
-					<div className="flex flex-col justify-center items-center gap-4 mt-8">
-						<OfficerEditor data={formData} onSave={handleOfficerSave} />
-
-						{/* Update Status */}
-						<StatusPopover
-							id={formData.id}
-							currentStatus={formData.status}
-							table="birth_registration"
-							email={formData.user_email} // or email field you collect
-							childName={formData.child_firstname}
-							emailContext="registry"
-						/>
-
-						{/* Download PDF */}
-						<Button
-							onClick={handleDownloadPDF}
-							className="w-full sm:w-48 bg-green-600 hover:bg-green-700 text-white"
-						>
-							Download PDF
-						</Button>
-
-						{/* Back to List */}
-						<Button
-							onClick={() => window.history.back()}
-							className="w-full sm:w-48 bg-gray-500 hover:bg-gray-600 text-white"
-						>
-							← Back to Registry List
-						</Button>
+		<DashboardShell>
+			<div className="min-h-screen bg-gray-100 py-10 px-4">
+				<div className="max-w-3xl mx-auto bg-white p-8 shadow-lg rounded-md">
+					<h1 className="text-2xl font-bold mb-6 text-center text-blue-700">
+						View Birth Registration
+					</h1>
+					<div className="space-y-6 text-lg px-10">
+						{/* 👤 Registrant Info */}
+						<section className="flex flex-col gap-2">
+							<h3 className="text-lg font-bold mb-2 text-center">
+								Registrant Info
+							</h3>
+							<p>
+								<strong>Full Name:</strong>{" "}
+								<span className="text-blue-700 px-3">{formData.fullname}</span>
+							</p>
+							<p>
+								<strong>Relationship:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.relationship}
+								</span>
+							</p>
+							<p>
+								<strong>Address:</strong>{" "}
+								<span className="text-blue-700 px-3">{formData.address}</span>
+							</p>
+							<p>
+								<strong>Contact:</strong>{" "}
+								<span className="text-blue-700 px-3">{formData.contact}</span>
+							</p>
+						</section>
+						{/* 👶 Child Info */}
+						<section className="flex flex-col gap-2">
+							<h3 className="text-lg font-bold mb-2 text-center">Child Info</h3>
+							<p>
+								<strong>First Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.child_firstname}
+								</span>
+							</p>
+							<p>
+								<strong>Middle Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.child_middlename}
+								</span>
+							</p>
+							<p>
+								<strong>Last Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.child_lastname}
+								</span>
+							</p>
+							<p>
+								<strong>Sex:</strong>{" "}
+								<span className="text-blue-700 px-3">{formData.sex}</span>
+							</p>
+							<p>
+								<strong>Birthdate:</strong>{" "}
+								<span className="text-blue-700 px-3">{formData.birthdate}</span>
+							</p>
+							<p>
+								<strong>Birthplace:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.birthplace}
+								</span>
+							</p>
+							<p>
+								<strong>Birth City:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.birth_city}
+								</span>
+							</p>
+							<p>
+								<strong>Birth Province:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.birth_province}
+								</span>
+							</p>
+						</section>
+						{/* 📅 Birth Details */}
+						<section className="flex flex-col gap-2">
+							<h3 className="text-lg font-bold mb-2 text-center">
+								Birth Details
+							</h3>
+							<p>
+								<strong>Type of Birth:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.type_of_birth}
+								</span>
+							</p>
+							<p>
+								<strong>Other Type:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.type_of_birth_other || "N/A"}
+								</span>
+							</p>
+							<p>
+								<strong>Birth Order:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.birth_order}
+								</span>
+							</p>
+							<p>
+								<strong>Other Birth Order:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.birth_order_other || "N/A"}{" "}
+								</span>
+							</p>
+							<p>
+								<strong>Multiple Birth Order:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.multiple_birth_order || "N/A"}{" "}
+								</span>
+							</p>
+							<p>
+								<strong>Other Multiple Order:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.multiple_birth_order_other || "N/A"}{" "}
+								</span>
+							</p>
+							<p>
+								<strong>Birth Weight in grams:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.birth_weight}
+								</span>
+							</p>
+						</section>
+						{/* 👩‍⚕️ Attendant Info */}
+						<section className="flex flex-col gap-2">
+							<h3 className="text-lg font-bold mb-2 text-center">
+								Birth Attendant
+							</h3>
+							<p>
+								<strong>Attendant:</strong>{" "}
+								<span className="text-blue-700 px-3">{formData.attendant}</span>
+							</p>
+							<p>
+								<strong>Attendant Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.attendant_name}
+								</span>
+							</p>
+							<p>
+								<strong>Address:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.attendant_address}
+								</span>
+							</p>
+						</section>
+						{/* 👪 Parents Info */}
+						<section className="flex flex-col gap-2">
+							<h3 className="text-lg font-bold mb-2 text-center">
+								Father Info
+							</h3>
+							<p>
+								<strong>First Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.father_firstname}
+								</span>
+							</p>
+							<p>
+								<strong>Middle Name:</strong>
+								<span className="text-blue-700 px-3">
+									{formData.father_middlename}
+								</span>
+							</p>
+							<p>
+								<strong>Last Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.father_lastname}
+								</span>
+							</p>
+							<p>
+								<strong>Nationality:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.father_nationality}
+								</span>
+							</p>
+							<p>
+								<strong>Religion:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.father_religion}
+								</span>
+							</p>
+							<p>
+								<strong>Occupation:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.father_occupation}
+								</span>
+							</p>
+							<p>
+								<strong>Age at Birth:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.father_age_at_birth}
+								</span>
+							</p>
+							<p>
+								<strong>Date of Birth:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.father_dob}
+								</span>
+							</p>
+							<p>
+								<strong>Residence:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.father_residence}
+								</span>
+							</p>
+						</section>
+						<section className="flex flex-col gap-2">
+							<h3 className="text-lg font-bold mb-2 text-center">
+								Mother Info
+							</h3>
+							<p>
+								<strong>First Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.mother_firstname}
+								</span>
+							</p>
+							<p>
+								<strong>Middle Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.mother_middlename}
+								</span>
+							</p>
+							<p>
+								<strong>Last Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.mother_lastname}
+								</span>
+							</p>
+							<p>
+								<strong>Nationality:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.mother_nationality}
+								</span>
+							</p>
+							<p>
+								<strong>Religion:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.mother_religion}
+								</span>
+							</p>
+							<p>
+								<strong>Occupation:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.mother_occupation}
+								</span>
+							</p>
+							<p>
+								<strong>Age at Birth:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.mother_age_at_birth}
+								</span>
+							</p>
+							<p>
+								<strong>Date of Birth:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.mother_dob}
+								</span>
+							</p>
+							<p>
+								<strong>Residence:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.mother_residence}
+								</span>
+							</p>
+						</section>
+						{/* 💍 Marriage Info */}
+						<section className="flex flex-col gap-2">
+							<h3 className="text-lg font-bold mb-2 text-center">
+								Marriage Info
+							</h3>
+							<p>
+								<strong>Parents Married:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.parents_married}
+								</span>
+							</p>
+							<p>
+								<strong>Marriage Date:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.marriage_date}
+								</span>
+							</p>
+							<p>
+								<strong>Marriage City:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.marriage_city}
+								</span>
+							</p>
+							<p>
+								<strong>Marriage Province:</strong>
+								<span className="text-blue-700 px-3">
+									{formData.marriage_province}
+								</span>
+							</p>
+							<p>
+								<strong>Marriage Country:</strong>
+								<span className="text-blue-700 px-3">
+									{formData.marriage_country}{" "}
+								</span>
+							</p>
+						</section>
+						{/* 🧒 Siblings */}
+						<section className="flex flex-col gap-2">
+							<h3 className="text-lg font-bold mb-2 text-center">
+								Siblings Summary
+							</h3>
+							<p>
+								<strong>Children Born Alive:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.children_born_alive}{" "}
+								</span>
+							</p>
+							<p>
+								<strong>Still Living:</strong>
+								<span className="text-blue-700 px-3">
+									{formData.children_still_living}{" "}
+								</span>
+							</p>
+							<p>
+								<strong>Deceased:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.children_deceased}{" "}
+								</span>
+							</p>
+						</section>
+						<section className="flex flex-col gap-2">
+							<h3 className="text-lg font-bold mb-2 text-center">
+								Prepared By
+							</h3>
+							<p>
+								<strong>Officer Name:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.officer_name || "N/A"}{" "}
+								</span>
+							</p>
+							<p>
+								<strong>Position:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.officer_position || "N/A"}
+								</span>
+							</p>
+							<p>
+								<strong>Date Prepared:</strong>{" "}
+								<span className="text-blue-700 px-3">
+									{formData.prepared_date || "N/A"}{" "}
+								</span>
+							</p>
+						</section>
+						<div className="flex justify-center items-center gap-4 pt-16">
+							{/* Back to List */}
+							<Button
+								onClick={() => window.history.back()}
+								className="w-full sm:w-48 bg-gray-500 hover:bg-gray-600 text-white"
+							>
+								← Back to Registry List
+							</Button>
+							<OfficerEditor data={formData} onSave={handleOfficerSave} />
+							{/* Update Status */}
+							<StatusPopover
+								id={formData.id}
+								currentStatus={formData.status}
+								table="birth_registration"
+								email={formData.user_email} // or email field you collect
+								childName={formData.child_firstname}
+								emailContext="registry"
+							/>
+							{/* Download PDF */}
+							<Button
+								onClick={handleDownloadPDF}
+								className="w-full sm:w-48 bg-green-600 hover:bg-green-700 text-white"
+							>
+								Download PDF
+							</Button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</DashboardShell>
 	);
 }

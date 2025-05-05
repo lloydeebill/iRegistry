@@ -51,7 +51,7 @@ const RequestPreview = () => {
 				setStatus("Error submitting request: " + error.message);
 			} else {
 				setStatus(
-					"Request submitted successfully. We'll notify you via email."
+					"Request submitted successfully. We'll notify you via email.",
 				);
 			}
 		} catch (err) {
