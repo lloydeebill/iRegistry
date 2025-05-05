@@ -301,7 +301,14 @@ export default function ViewBirthRegistration() {
 						<OfficerEditor data={formData} onSave={handleOfficerSave} />
 
 						{/* Update Status */}
-						<StatusPopover id={formData.id} currentStatus={formData.status} />
+						<StatusPopover
+							id={formData.id}
+							currentStatus={formData.status}
+							table="birth_registration"
+							email={formData.user_email} // or email field you collect
+							childName={formData.child_firstname}
+							emailContext="registry"
+						/>
 
 						{/* Download PDF */}
 						<Button

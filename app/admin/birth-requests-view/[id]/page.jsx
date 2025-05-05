@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { generateCertificatePDF } from "@/utils/generateCertificatePDF";
+import { StatusPopover } from "../../admin-components/StatusPopover";
 
 export default function BirthRequestDetailsPage() {
 	const { id } = useParams();
@@ -55,7 +56,37 @@ export default function BirthRequestDetailsPage() {
 
 	if (!requestData) return <p className="text-center mt-10">Loading...</p>;
 
-	// UI continues unchanged...
+	const handleConfirmAndSendEmail = async () => {
+		try {
+			// 1. Update status to confirmed
+			const { error } = await supabase
+				.from(table) // ✅ DYNAMIC
+				.update({ status: value })
+				.eq("id", id);
+
+			if (updateError) {
+				throw new Error("Failed to update status: " + updateError.message);
+			}
+
+			// 2. Send confirmation email
+			const response = await fetch("/api/send-email", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					email: formData.user_email, // or registrant email if stored
+					childName: formData.child_firstname,
+				}),
+			});
+
+			const result = await response.json();
+			if (!response.ok) throw new Error(result?.error || "Email send failed");
+
+			alert("Confirmation email sent successfully!");
+			window.location.reload();
+		} catch (error) {
+			alert("❌ " + error.message);
+		}
+	};
 
 	return (
 		<div className="max-w-6xl mx-auto my-12 px-4 grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -101,6 +132,9 @@ export default function BirthRequestDetailsPage() {
 						<b>Mother:</b> {requestData.mother_firstname}{" "}
 						{requestData.mother_middlename} {requestData.mother_lastname}
 					</p>
+					<p>
+						<b>User Email:</b> {requestData.user_email}
+					</p>
 				</div>
 
 				{matchingRecord && (
@@ -124,6 +158,15 @@ export default function BirthRequestDetailsPage() {
 						>
 							Download PDF
 						</button>
+
+						<StatusPopover
+							id={requestData.id}
+							currentStatus={requestData.status}
+							table="birth_requests"
+							email={requestData.user_email}
+							childName={requestData.child_firstname}
+							emailContext="request"
+						/>
 
 						<button
 							onClick={() => window.history.back()}

@@ -10,7 +10,15 @@ import {
 import { Command, CommandItem, CommandList } from "@/components/ui/command";
 import { supabase } from "@/lib/supabaseClient";
 
-export function StatusPopover({ id, currentStatus, onChange }) {
+export function StatusPopover({
+	id,
+	currentStatus,
+	table = "birth_registration",
+	email,
+	childName,
+	emailContext, // "request" or "registration"
+	onChange,
+}) {
 	const [open, setOpen] = useState(false);
 	const [selectedStatus, setSelectedStatus] = useState(currentStatus);
 	const statuses = ["Pending", "Verified", "Completed"];
@@ -20,24 +28,52 @@ export function StatusPopover({ id, currentStatus, onChange }) {
 	}, [currentStatus]);
 
 	const handleSelect = async (value) => {
-		if (!id) {
-			alert("❌ Error: No ID provided.");
-			return;
-		}
+		if (!id) return alert("❌ No ID provided");
+
+		console.log("🔁 Attempting status update...");
+		console.log("📄 Target Table:", table);
+		console.log("🆔 Target ID:", id);
+		console.log("📌 New Status:", value);
 
 		const { error } = await supabase
-			.from("birth_registration")
+			.from(table)
 			.update({ status: value })
 			.eq("id", id);
 
-		if (!error) {
-			setSelectedStatus(value);
-			onChange && onChange(value);
-			setOpen(false);
-			console.log("✅ Status updated to:", value);
-		} else {
+		if (error) {
+			console.error("❌ Supabase update failed:", error);
 			alert("Error updating status: " + error.message);
-			console.error("Supabase error:", error);
+			return;
+		}
+
+		setSelectedStatus(value);
+		onChange && onChange(value);
+		setOpen(false);
+
+		console.log("✅ Supabase status update successful!");
+
+		// 📧 Send confirmation email if status is Verified
+		if (value.toLowerCase() === "verified" && email && childName) {
+			console.log("📬 Sending verification email to:", email);
+			try {
+				const response = await fetch("/api/send-email", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						email,
+						childName,
+						type: emailContext || "request", // fallback to "request"
+					}),
+				});
+
+				const result = await response.json();
+				if (!response.ok) throw new Error(result?.error || "Unknown error");
+				alert("📧 Email sent!");
+				console.log("✅ Email sent successfully!");
+			} catch (err) {
+				console.error("❌ Email sending failed:", err);
+				alert("Email failed: " + err.message);
+			}
 		}
 	};
 

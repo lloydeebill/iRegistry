@@ -10,6 +10,7 @@ const FormPreview = () => {
 	const get = (key) => searchParams.get(key) || "";
 
 	const formData = {
+		user_email: get("user_email"),
 		fullname: get("fullname"),
 		relationship: get("relationship"),
 		address: get("address"),

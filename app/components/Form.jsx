@@ -4,12 +4,14 @@ import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { uploadFile } from "@/utils/uploadFile";
+import { supabase } from "@/lib/supabaseClient";
 
 function Form() {
 	//gcash modal
 	const [showQR, setShowQR] = useState(false);
 
 	const [values, setValues] = useState({
+		user_email: "",
 		fullname: "",
 		relationship: "",
 		address: "",
@@ -81,6 +83,23 @@ function Form() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		const getUserEmail = async () => {
+			const {
+				data: { user },
+			} = await supabase.auth.getUser();
+
+			if (user?.email) {
+				setValues((prev) => ({
+					...prev,
+					user_email: user.email,
+				}));
+			}
+		};
+
+		getUserEmail();
+	}, []);
+
 	const handleChanges = (e) => {
 		const { name, type, files, value } = e.target;
 		setValues({
@@ -108,6 +127,19 @@ function Form() {
 			<hr className="my-4 border-t-4 border-gray-700" />
 
 			<form onSubmit={handleSubmit} className="space-y-4">
+				<div>
+					<label className="text-sm font-bold text-gray-600 block mb-1">
+						Logged-in Email:
+					</label>
+					<input
+						type="email"
+						name="user_email"
+						value={values.user_email}
+						readOnly
+						className="block w-full p-2 rounded text-sm border border-gray-300 bg-gray-100"
+					/>
+				</div>
+
 				<div>
 					<label className="text-sm font-bold text-gray-600 block mb-1">
 						Full Name (Pangalan ng nagparehistro):
@@ -438,7 +470,7 @@ function Form() {
 										/>
 										<span>{label}</span>
 									</label>
-								)
+								),
 							)}
 							{values.birth_order === "Other" && (
 								<input
@@ -485,7 +517,7 @@ function Form() {
 										/>
 										<span>{label}</span>
 									</label>
-								)
+								),
 							)}
 						</div>
 					</div>
