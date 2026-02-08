@@ -54,7 +54,7 @@ const Footer = () => {
         border-t border-gray-300 sm:px-16 px-6 py-2"
 			>
 				<p className="flex-1 flex max-sm:mt-4 gap-10 mt-4">
-					@LARIOSA QUEZZAGAN 2025. All Rights Reserved
+					@LCR BUENAVISTA. All Rights Reserved
 				</p>
 				<div className="flex-1 flex sm:justify-end justify-center max-sm:mt-4 gap-10 mt-4">
 					<Link href="/" className=" hover:text-blue-400">
