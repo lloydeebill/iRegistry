@@ -333,7 +333,7 @@ function Form() {
 						<input
 							type="text"
 							name="birth_city"
-							placeholder="e.g. Nasipit"
+							placeholder="e.g. Buenavista"
 							value={values.birth_city}
 							onChange={handleChanges}
 							className="block w-full p-2 rounded text-sm border border-gray-300"
@@ -1079,7 +1079,7 @@ function Form() {
 						I, hereby consent to the following:
 						<br />
 						<br />
-						- I authorize the Local Civil Registry Office of Nasipit, Agusan del
+						- I authorize the Local Civil Registry Office of Buenavista, Agusan del
 						Norte to collect and use my personal information for the purpose of
 						applying for the certificate of live birth. <br />
 						- I understand that I have the right to access my personal

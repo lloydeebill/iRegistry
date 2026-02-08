@@ -18,8 +18,8 @@ const Footer = () => {
 					<p className="text-base">
 						<span className="font-bold">Address</span>
 						<br />
-						Nasipit Municipal Hall, <br />
-						Nasipit, Agusan del Norte, PH
+						Buenavista Municipal Hall, <br />
+						Buenavista, Agusan del Norte, PH
 					</p>
 					<p className="text-base">
 						<span className="font-bold">Office Hours</span>
